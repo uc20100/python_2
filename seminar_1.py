@@ -6,18 +6,17 @@
 # Отдельно сообщить является ли треугольник разносторонним, равнобедренным или равносторонним.
 
 SIDE_A = 7
-SIDE_B = 5
+SIDE_B = 8
 SIDE_C = 7
 
 if SIDE_A > SIDE_B + SIDE_C or SIDE_B > SIDE_A + SIDE_C or SIDE_C > SIDE_A + SIDE_B:
     print('Треугольника с такими сторонами не существует')
+elif SIDE_A == SIDE_B == SIDE_C:
+    print('Это равносторонний треугольник')
+elif SIDE_A == SIDE_B or SIDE_A == SIDE_C or SIDE_C == SIDE_B:
+    print('Это равнобедренный треугольник')
 else:
-    if SIDE_A == SIDE_B == SIDE_C:
-        print('Это равносторонний треугольник')
-    elif SIDE_A == SIDE_B or SIDE_A == SIDE_C or SIDE_C == SIDE_B:
-        print('Это равнобедренный треугольник')
-    else:
-        print('Это разносторонний треугольник')
+    print('Это разносторонний треугольник')
 
 
 
