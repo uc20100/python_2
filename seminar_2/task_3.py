@@ -15,7 +15,7 @@ R_SIZE = 2
 BILL = 50
 BIG_MONEY = 5_000_000
 
-CONTRIBUTION_INDEX = 0
+CASH_INDEX = 0
 COUNT_INDEX = 1
 BALANCE_INDEX = 2
 MULTIPLICITY = 3
@@ -30,7 +30,7 @@ def add_3_percent(args: list) -> str:
     :return: информация об операции
     """
     if args[COUNT_INDEX] >= 2:
-        args[COUNT_INDEX] = 1
+        args[COUNT_INDEX] = 0
         args[BALANCE_INDEX] = args[BALANCE_INDEX] * 1.03
         return f'Счетчик {args[COUNT_INDEX]}. Вам начислено 3%, баланс {round(args[BALANCE_INDEX], R_SIZE)} '
     else:
@@ -44,12 +44,12 @@ def replenishment(args: list) -> str:
     :param args: взнос, счетчик, баланс, кратность взноса/выдачи
     :return: информация об операции
     """
-    if not args[CONTRIBUTION_INDEX] % args[MULTIPLICITY]:
+    if not args[CASH_INDEX] % args[MULTIPLICITY]:
         print(add_3_percent(data_atm))
-        args[BALANCE_INDEX] = args[BALANCE_INDEX] + args[CONTRIBUTION_INDEX]
-        return f'Вы положили {round(args[CONTRIBUTION_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
+        args[BALANCE_INDEX] = args[BALANCE_INDEX] + args[CASH_INDEX]
+        return f'Вы положили {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
     else:
-        return f'Ошибка операции, положите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
+        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
 
 
 def cash_withdrawal(args: list) -> str:
@@ -58,20 +58,20 @@ def cash_withdrawal(args: list) -> str:
     :param args: сумма выдачи, счетчик, баланс, кратность взноса/выдачи
     :return: информация об операции
     """
-    if not args[CONTRIBUTION_INDEX] % args[MULTIPLICITY]:
-        if args[BALANCE_INDEX] >= args[CONTRIBUTION_INDEX] * 1.015:
-            percent = args[CONTRIBUTION_INDEX] * 0.015
+    if not args[CASH_INDEX] % args[MULTIPLICITY]:
+        if args[BALANCE_INDEX] >= args[CASH_INDEX] * 1.015:
+            percent = args[CASH_INDEX] * 0.015
             print(add_3_percent(data_atm))
             if 30 < percent < 600:
-                args[BALANCE_INDEX] -= args[CONTRIBUTION_INDEX] * 1.015
-                return f'Вы сняли {round(args[CONTRIBUTION_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, 1.5% комиссия({round(percent, R_SIZE)}₽)'
+                args[BALANCE_INDEX] -= args[CASH_INDEX] * 1.015
+                return f'Вы сняли {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, 1.5% комиссия({round(percent, R_SIZE)}₽)'
             else:
-                args[BALANCE_INDEX] -= args[CONTRIBUTION_INDEX]
-                return f'Вы сняли {round(args[CONTRIBUTION_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, без комиссии'
+                args[BALANCE_INDEX] -= args[CASH_INDEX]
+                return f'Вы сняли {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, без комиссии'
         else:
             return f'За снятие взимается плата 1.5%, у вас не хватает средств. Баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
     else:
-        return f'Введите сумму кратную {args[MULTIPLICITY]}'
+        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
 
 
 def get_tax(args: list) -> str | None:
@@ -94,13 +94,13 @@ def get_tax(args: list) -> str | None:
 
 
 info_str: str = '\n   МЕНЮ \n' \
-                + '1. Пополнить сумма (например 1 500)\n' \
-                + '2. Снять сумма (например 2 300)\n' \
-                + '3. Выйти\n'
+                + '1. Пополнить сумма (например: 1 500)\n' \
+                + '2. Снять сумма (например: 2 300)\n' \
+                + '3. Выйти (например: 3)\n'
 print(info_str)
 
 while True:
-    str_val = input(f'Введите данные через пробел: ')
+    str_val = input(f'Введите данные через пробел: ').strip()
     list_val = str_val.split(' ')
     if len(list_val) == 2 and list_val[0].isdigit() and list_val[1].isdigit() or len(list_val) == 1 and list_val[0].isdigit():
         type_com = int(list_val[0])
@@ -110,12 +110,12 @@ while True:
                 case 1:
                     print_val = get_tax(data_atm)
                     print(print_val) if print_val else None
-                    data_atm[CONTRIBUTION_INDEX] = data_com
+                    data_atm[CASH_INDEX] = data_com
                     print(replenishment(data_atm))
                 case 2:
                     print_val = get_tax(data_atm)
                     print(print_val) if print_val else None
-                    data_atm[CONTRIBUTION_INDEX] = data_com
+                    data_atm[CASH_INDEX] = data_com
                     print(cash_withdrawal(data_atm))
                 case _:
                     print('Не верный формат. Введите данные через пробел, (например: 1 500)')
@@ -123,5 +123,7 @@ while True:
             if type_com == 3:
                 print(f'Баланс: {round(data_atm[BALANCE_INDEX], R_SIZE)} \n   До свидания')
                 break
+            else:
+                print('Не верный формат. Введите данные через пробел, (например: 1 500)')
     else:
         print('Не верный формат. Введите данные через пробел, (например: 1 500)')
