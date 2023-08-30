@@ -32,7 +32,7 @@ def add_3_percent(args: list) -> str:
     if args[COUNT_INDEX] >= 2:
         args[COUNT_INDEX] = 0
         args[BALANCE_INDEX] = args[BALANCE_INDEX] * 1.03
-        return f'Счетчик {args[COUNT_INDEX]}. Вам начислено 3%, баланс {round(args[BALANCE_INDEX], R_SIZE)} '
+        return f'Счетчик {args[COUNT_INDEX]}. Вам начислено 3%, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽ '
     else:
         args[COUNT_INDEX] += 1
         return f'Счетчик {args[COUNT_INDEX]}'
@@ -49,7 +49,7 @@ def replenishment(args: list) -> str:
         args[BALANCE_INDEX] = args[BALANCE_INDEX] + args[CASH_INDEX]
         return f'Вы положили {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
     else:
-        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
+        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
 
 
 def cash_withdrawal(args: list) -> str:
@@ -73,7 +73,7 @@ def cash_withdrawal(args: list) -> str:
         else:
             return f'За снятие взимается плата 1.5%, у вас не хватает средств. Баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
     else:
-        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
+        return f'Ошибка операции, укажите сумму кратную {round(args[MULTIPLICITY], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
 
 
 def get_tax(args: list) -> str | None:
@@ -119,7 +119,7 @@ while True:
                     print('Не верный формат. Введите данные через пробел, (например: 1 500)')
         else:
             if type_com == 3:
-                print(f'Баланс: {round(data_atm[BALANCE_INDEX], R_SIZE)} \n   До свидания')
+                print(f'Баланс: {round(data_atm[BALANCE_INDEX], R_SIZE)}₽ \n   До свидания')
                 break
             else:
                 print('Не верный формат. Введите данные через пробел, (например: 1 500)')
