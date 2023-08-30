@@ -5,7 +5,7 @@
 # кода используйте модуль fractions.
 
 from decimal import Decimal
-import fractions
+from fractions import Fraction
 
 
 def read_value(number_val: int) -> list:
@@ -28,10 +28,10 @@ val_1 = read_value(1)
 val_2 = read_value(2)
 
 print(f'Сумма дробей:                 {Decimal(val_1[0]) / Decimal(val_1[1]) + Decimal(val_2[0]) / Decimal(val_2[1])}')
-print(f'Проверка суммы дробей:        {fractions.Fraction(val_1[2]) + fractions.Fraction(val_2[2])}')
+print(f'Проверка суммы дробей:        {Fraction(val_1[2]) + Fraction(val_2[2])}')
 print()
 print(f'Произведение дробей:          {Decimal(val_1[0]) / Decimal(val_1[1]) * Decimal(val_2[0]) / Decimal(val_2[1])}')
-print(f'Проверка произведения дробей: {fractions.Fraction(val_1[2]) * fractions.Fraction(val_2[2])}')
+print(f'Проверка произведения дробей: {Fraction(val_1[2]) * Fraction(val_2[2])}')
 
 
 
