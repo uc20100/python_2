@@ -59,14 +59,16 @@ def cash_withdrawal(args: list) -> str:
     :return: информация об операции
     """
     if not args[CASH_INDEX] % args[MULTIPLICITY]:
-        if args[BALANCE_INDEX] >= args[CASH_INDEX] * 1.015:
-            percent = args[CASH_INDEX] * 0.015
+        percent = 1
+        if 30 < args[CASH_INDEX] < 600:
+            percent += 0.015
+        if args[BALANCE_INDEX] >= args[CASH_INDEX] * percent:
+            cash_percent = args[CASH_INDEX] * (percent - 1)
             print(add_3_percent(data_atm))
-            if 30 < percent < 600:
-                args[BALANCE_INDEX] -= args[CASH_INDEX] * 1.015
-                return f'Вы сняли {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, 1.5% комиссия({round(percent, R_SIZE)}₽)'
+            args[BALANCE_INDEX] -= args[CASH_INDEX] * percent
+            if 30 < args[CASH_INDEX]*percent < 600:
+                return f'Вы сняли {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, 1.5% комиссия({round(cash_percent, R_SIZE)}₽)'
             else:
-                args[BALANCE_INDEX] -= args[CASH_INDEX]
                 return f'Вы сняли {round(args[CASH_INDEX], R_SIZE)}₽, баланс {round(args[BALANCE_INDEX], R_SIZE)}₽, без комиссии'
         else:
             return f'За снятие взимается плата 1.5%, у вас не хватает средств. Баланс {round(args[BALANCE_INDEX], R_SIZE)}₽'
@@ -88,11 +90,6 @@ def get_tax(args: list) -> str | None:
         return None
 
 
-
-
-
-
-
 info_str: str = '\n   МЕНЮ \n' \
                 + '1. Пополнить сумма (например: 1 500)\n' \
                 + '2. Снять сумма (например: 2 300)\n' \
@@ -102,7 +99,8 @@ print(info_str)
 while True:
     str_val = input(f'Введите данные через пробел: ').strip()
     list_val = str_val.split(' ')
-    if len(list_val) == 2 and list_val[0].isdigit() and list_val[1].isdigit() or len(list_val) == 1 and list_val[0].isdigit():
+    if len(list_val) == 2 and list_val[0].isdigit() and list_val[1].isdigit() or len(list_val) == 1 and list_val[
+        0].isdigit():
         type_com = int(list_val[0])
         if len(list_val) == 2:
             data_com = int(list_val[1])
