@@ -13,7 +13,7 @@ def backpack_options(weight_limit: int, things_value: dict) -> list:
     """
     return_list = []
     len_name = 0
-    for i in things:
+    for i in things_value:
         len_name += len(i) + 2
     n_variant = 1
     for i in range(1, (2 ** len(things_value))):
