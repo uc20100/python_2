@@ -2,7 +2,7 @@
 
 def print_matrix(matrix):
     """
-    Функция выводит матрицу на консоль
+    Функция выводит матрицу на консоль.
     """
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
@@ -12,7 +12,7 @@ def print_matrix(matrix):
 
 def matrix_transpose(original_matrix: list) -> list:
     """
-    Функция транспонирует матрицу
+    Функция транспонирует матрицу.
 
     :param original_matrix: исходная матрица
     :return: транспонированная матрица
