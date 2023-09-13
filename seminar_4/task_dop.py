@@ -19,3 +19,10 @@ def company_analysis(**kwargs) -> bool:
 
 status = company_analysis(гермес=[10, 5, -4], рога_и_копыта=[-3, -1, 1], восход=[2, 2, 1])
 print(status)
+
+
+
+
+
+
+
