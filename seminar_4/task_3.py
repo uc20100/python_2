@@ -116,7 +116,6 @@ info_str: str = '\n   МЕНЮ \n' \
 print(info_str)
 
 while True:
-    print(data_atm[STORY_INDEX])
     str_val = input(f'Введите данные через пробел: ').strip()
     list_val = str_val.split(' ')
     if len(list_val) == 2 and list_val[0].isdigit() and list_val[1].isdigit() or len(list_val) == 1 and list_val[
