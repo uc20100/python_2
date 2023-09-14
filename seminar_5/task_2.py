@@ -17,10 +17,9 @@ def bonuses(*, name: list, rate: list, percent: list) -> dict:
     yield {name_: rate_ * float(percent_[:-1])*0.01 for name_, rate_, percent_ in list(zip(name, rate, percent))}
 
 
-s = ['Иванов', 'Петров', 'Сидоров']
-t = [100, 200, 300]
-p = ['10.5%', '5.5%', '6.1%']
+name_user = ['Иванов', 'Петров', 'Сидоров']
+rate_user = [100, 200, 300]
+percent_user = ['10.5%', '5.5%', '6.1%']
 
-
-for item in bonuses(name=s, rate=t, percent=p):
+for item in bonuses(name=name_user, rate=rate_user, percent=percent_user):
     print(item)
