@@ -8,10 +8,10 @@
 # без перехода на новую строку.
 
 
-sdd = (f'{i + k} X {j: <2} = {((i + k) * j): <2}      {"S" if (i+k)==5 or (i+k)==9 else ""}{"S" if (i+k)*j==50 else ""}'
+gen_multiplication_table = (f'{i + k} X {j: <2} = {((i + k) * j): <2}      {"S" if (i+k)==5 or (i+k)==9 else ""}{"S" if (i+k)*j==50 else ""}'
        for i in range(2, 10, 4) for j in range(2, 11) for k in range(0, 4))
 
 print('                ТАБЛИЦА УМНОЖЕНИЯ')
-for item in sdd:
+for item in gen_multiplication_table:
     s = item.replace('S', '\n')
     print(s, end='')
