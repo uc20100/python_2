@@ -61,16 +61,14 @@ def private_dict_view():
     """
     Функция вывода защищенного словаря
     """
-    max_len_mystery = max(len(key) for key in _private_dict.keys() )
+    max_len_mystery = max(len(key) for key in _private_dict.keys())
     print('\n    СТАТИСТИКА')
-    print(*(f'{key: <{max_len_mystery+2}} - {value: <2}\n' for key, value in _private_dict.items()))
-
-
+    print(*(f'{key: <{max_len_mystery + 2}} - {value: <2}\n' for key, value in _private_dict.items()))
 
 
 if __name__ == '__main__':
-for mystery_str_, variant_solution_ in dict_mystery().items():
-    n_answer = solution(mystery_str_, variant_solution_)
-    if n_answer > 0:
-        save2private_dict(mystery_str_, n_answer)
-private_dict_view()
+    for mystery_str_, variant_solution_ in dict_mystery().items():
+        n_answer = solution(mystery_str_, variant_solution_)
+        if n_answer > 0:
+            save2private_dict(mystery_str_, n_answer)
+    private_dict_view()
