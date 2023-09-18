@@ -2,6 +2,9 @@
 # Функция получает на вход загадку, список с возможными вариантами отгадок и количество попыток на угадывание.
 # Программа возвращает номер попытки, с которой была отгадана загадка или ноль, если попытки исчерпаны.
 
+_private_dict = {}
+
+
 def solution(mystery_str: str, variant_solution: list, attempts: int = 3):
     """
     Функция отгадывания загадки
@@ -17,7 +20,7 @@ def solution(mystery_str: str, variant_solution: list, attempts: int = 3):
         for item in variant_solution:
             if answer == item.lower():
                 print("Ура, загадка разгадана!")
-                return i+1
+                return i + 1
         else:
             print(f'У вас осталось {attempts - i - 1} попыток')
     return 0
@@ -43,15 +46,26 @@ def dict_mystery() -> dict:
 # Отдельно напишите функцию, которая выводит результаты угадывания из защищённого словаря в удобном для чтения виде.
 # Для формирования результатов используйте генераторное выражение.
 
-def dict_ok_answer
+
+def save2private_dict(mystery_str: str, attempts_ok: int):
+    """
+    Функция хранит результаты отгадывания.
+
+    :param mystery_str: загадка
+    :param attempts_ok: номер удачной попытки
+    """
+    _private_dict[mystery_str] = attempts_ok
+
+
+def private_dict_view():
+    """
+    Функция вывода защищенного словаря
+    """
+    print(*(f'{key} - {value} \n' for key, value in _private_dict.items()))
+
 
 for key, value in dict_mystery().items():
     solution(key, value)
-
-
-
-
-
 
 # if __name__ == '__main__':
 #     data = ('Зимой и летом, одним цветом', ['Елка', 'Сосна', 'Пихта'], 3)
