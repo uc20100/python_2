@@ -35,7 +35,6 @@ def start_quiz(min_number: int = 1, max_number: int = 10, attempts: int = 3) -> 
     return False
 
 
-gen_param = (int(argv[i]) for i in range(1, len(argv)))
-
 if __name__ == '__main__':
+    gen_param = (int(argv[i]) for i in range(1, len(argv)))
     start_quiz(*gen_param)
