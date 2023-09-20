@@ -5,6 +5,8 @@
 import random as rn
 from sys import argv
 
+__all__ = ['start_quiz']
+
 
 def start_quiz(min_number: int = 1, max_number: int = 10, attempts: int = 3) -> bool:
     """
