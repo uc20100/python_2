@@ -61,9 +61,12 @@ def private_dict_view():
     """
     Функция вывода защищенного словаря
     """
-    max_len_mystery = max(len(key) for key in _private_dict.keys())
     print('\n    СТАТИСТИКА')
-    print(*(f'{key: <{max_len_mystery + 2}} - {value: <2}\n' for key, value in _private_dict.items()))
+    if _private_dict != {}:
+        max_len_mystery = max(len(key) for key in _private_dict.keys())
+        print(*(f'\n{key: <{max_len_mystery}} - {value: <2}' for key, value in _private_dict.items()))
+    else:
+        print('Ничего не угадали (')
 
 
 if __name__ == '__main__':
