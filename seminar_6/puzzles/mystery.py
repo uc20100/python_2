@@ -1,3 +1,8 @@
+"""
+Модуль отгадывания загадок
+"""
+__all__ = ['solution', 'get_dict', 'save', 'view']
+
 # 4. Создайте модуль с функцией внутри.
 # Функция получает на вход загадку, список с возможными вариантами отгадок и количество попыток на угадывание.
 # Программа возвращает номер попытки, с которой была отгадана загадка или ноль, если попытки исчерпаны.
@@ -29,9 +34,9 @@ def solution(mystery_str: str, variant_solution: list, attempts: int = 3):
 # 5. Добавьте в модуль с загадками функцию, которая хранит словарь списков.
 # Ключ словаря - загадка, значение - список с отгадками.
 # Функция в цикле вызывает загадывающую функцию, чтобы передать ей все свои загадки.
-def dict_mystery() -> dict:
+def get_dict() -> dict:
     """
-    Функция хранит словарь загадок и ответов.
+    Функция выдает словарь загадок и ответов.
 
     :return: загадки и ответы
     """
@@ -47,9 +52,9 @@ def dict_mystery() -> dict:
 # Для формирования результатов используйте генераторное выражение.
 
 
-def save2private_dict(mystery_str: str, attempts_ok: int):
+def save(mystery_str: str, attempts_ok: int):
     """
-    Функция хранит результаты отгадывания.
+    Функция сохраняет результаты отгадывания.
 
     :param mystery_str: загадка
     :param attempts_ok: номер удачной попытки
@@ -57,9 +62,9 @@ def save2private_dict(mystery_str: str, attempts_ok: int):
     _private_dict[mystery_str] = attempts_ok
 
 
-def private_dict_view():
+def view():
     """
-    Функция вывода защищенного словаря
+    Функция вывода результатов отгадывания
     """
     print('\n    СТАТИСТИКА')
     if _private_dict != {}:
@@ -70,8 +75,8 @@ def private_dict_view():
 
 
 if __name__ == '__main__':
-    for mystery_str_, variant_solution_ in dict_mystery().items():
+    for mystery_str_, variant_solution_ in get_dict().items():
         n_answer = solution(mystery_str_, variant_solution_)
         if n_answer > 0:
-            save2private_dict(mystery_str_, n_answer)
-    private_dict_view()
+            save(mystery_str_, n_answer)
+    view()
