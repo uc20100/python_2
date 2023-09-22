@@ -1,6 +1,7 @@
 """
 Модуль проверки достоверности даты по Григорианскому календарю
 """
+from sys import argv
 __all__ = ['check']
 
 
@@ -53,4 +54,8 @@ def check(value: str) -> bool:
 
 
 if __name__ == '__main__':
-    print(check('29.02.2000'))
+    if len(argv) > 1:
+        print(f'{check(argv[1]) = }')
+    else:
+        print(f'{check("") = }')
+
