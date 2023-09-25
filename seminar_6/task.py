@@ -2,7 +2,7 @@
 # Добавьте в __init__ пакета имена модулей внутри дандер __all__.
 # В модулях создайте дандер __all__ и укажите только те функции, которые могут верно работать за пределами модуля.
 
-from puzzles import date, mystery, numbers_quiz
+from puzzles import date, mystery, numbers_quiz, chess
 
 # Модуль игры угадай число
 numbers_quiz.start_quiz()
@@ -21,3 +21,22 @@ print()
 # Модуль проверки даты
 date_str = '29.02.2000'
 print(f'Проверка даты {date_str} = {date.check(date_str)}')
+print()
+print()
+
+# ДЗ
+# Модуль шахматы
+# Проверка хорошей и плохой расстановки ферзей
+good = [12, 36, 77, 84, 28, 41, 53, 65]
+bad = [12, 36, 77, 84, 28, 41, 53, 63]
+
+print(f'{chess.beating_queen(*good) = }')
+print(f'{chess.beating_queen(*bad) = }')
+print()
+print()
+
+# Генерация хорошей расстановки ферзей
+print('Хорошие расстановки ферзей:')
+good_queen = chess.random_queen()
+for n, item in enumerate(good_queen, 1):
+    print(f'{n} - {item}')
