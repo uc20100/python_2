@@ -6,7 +6,9 @@
 # Если ферзи не бьют друг друга верните истину, а если бьют - ложь.
 from typing import Set
 
-__all__ = ['beating_queen']
+__all__ = ['beating_queen', 'random_queen']
+
+import random as rnd
 
 
 def _location_queen(location: int) -> set[int]:
@@ -50,7 +52,7 @@ def beating_queen(queen_1: int, queen_2: int, queen_3: int, queen_4: int,
     :param queen_1: локация ферзя 1
     :param queen_2: локация ферзя 2
     :param queen_3: локация ферзя 3
-    :param queen_4: локация ферзя 4f'{_location_queen(item) & queen_placement = }'
+    :param queen_4: локация ферзя 4
     :param queen_5: локация ферзя 5
     :param queen_6: локация ферзя 6
     :param queen_7: локация ферзя 7
@@ -59,16 +61,55 @@ def beating_queen(queen_1: int, queen_2: int, queen_3: int, queen_4: int,
     """
     queen_placement = {queen_1, queen_2, queen_3, queen_4, queen_5, queen_6, queen_7, queen_8}
 
-    for item in queen_placement:
-        item_set = {item}
-        if not ((_location_queen(item) & queen_placement - item_set) == set()):
+    for item_ in queen_placement:
+        item_set = {item_}
+        if not ((_location_queen(item_) & queen_placement - item_set) == set()):
             return False
     return True
 
 
+# ДЗ, задание №3. Напишите функцию в шахматный модуль. Используйте генератор случайных чисел для случайной расстановки
+# ферзей в задаче выше. Проверяйте различный случайные  варианты и выведите 4 успешных расстановки
+def random_queen() -> list:
+    """
+    Функция случайной расстановки 8 ферзей, чтобы они не били друг друга.
+
+    :return: 4 варианта расстановки
+    """
+    units = [0, 9]
+    tens = [0, 9]
+    list_queen = []
+    result_out = []
+    count = 0
+
+    while True:
+        for _ in range(8):
+            queen_location = rnd.choice([i for i in range(11, 89, 1) if i % 10 not in units if i // 10 not in tens])
+            list_queen.append(queen_location)
+            units.append(queen_location % 10)
+            tens.append(queen_location // 10)
+        if beating_queen(*list_queen):
+            if count < 4:
+                result_out.append(list_queen.copy())
+                count += 1
+            else:
+                break
+        units = [0, 9]
+        tens = [0, 9]
+        list_queen.clear()
+    return result_out
+
+
 if __name__ == '__main__':
-    # Хорошая расстановка ферзей
+    # Хорошая и плохая расстановка ферзей
     good = (31, 52, 23, 84, 15, 76, 47, 68)
     bad = (31, 52, 23, 84, 15, 76, 47, 67)
     print(f'{beating_queen(*good) = }')
     print(f'{beating_queen(*bad) = }')
+    print()
+
+    # Генерация хороших расстановок ферзей
+    print('Хорошие расстановки ферзей:')
+    good_queen = random_queen()
+    for n, item in enumerate(good_queen, 1):
+        print(f'{n} - {item}')
