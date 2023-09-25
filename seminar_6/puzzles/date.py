@@ -54,7 +54,7 @@ def check(value: str) -> bool:
 
 
 if __name__ == '__main__':
-    if len(argv) > 1:
+    if len(argv) == 2:
         print(f'{check(argv[1]) = }')
     else:
         print(f'{check("") = }')
