@@ -88,18 +88,15 @@ def random_queen() -> list:
     result_out = []
     count = 0
 
-    while True:
+    while count < 4:
         for _ in range(8):
             queen_location = rnd.choice([i for i in range(11, 89, 1) if i % 10 not in units if i // 10 not in tens])
             list_queen.append(queen_location)
             units.append(queen_location % 10)
             tens.append(queen_location // 10)
         if beating_queen(*list_queen):
-            if count < 4:
-                result_out.append(list_queen.copy())
-                count += 1
-            else:
-                break
+            result_out.append(list_queen.copy())
+            count += 1
         units = [0, 9]
         tens = [0, 9]
         list_queen.clear()
