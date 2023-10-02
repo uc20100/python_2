@@ -1,3 +1,6 @@
+"""
+Модуль генерации файлов (в директорию)
+"""
 # Задание №6
 # ✔ Дорабатываем функции из предыдущих задач.
 # ✔ Генерируйте файлы в указанную директорию — отдельный параметр функции.
@@ -5,7 +8,7 @@
 # (добавьте проверки).
 # ✔ Существующие файлы не должны удаляться/изменяться в случае совпадения имён.
 
-import os
+__all__ = ['any_file_generator_to_folder']
 from pathlib import Path
 import random as rnd
 
@@ -40,7 +43,6 @@ def _file_generator_to_folder(us_folder: str, type_file: str, min_name: int = 6,
             file_name += chr(rnd.randint(0x61, 0x7A))
 
         for obj_ in p.iterdir():
-            print(f'{obj_ =}')
             if obj_ == Path().cwd() / us_folder / f'{file_name}.{type_file}' and obj_.is_file():
                 break
         else:
@@ -54,7 +56,7 @@ def _file_generator_to_folder(us_folder: str, type_file: str, min_name: int = 6,
 
 def any_file_generator_to_folder(folder: str, **kwargs):
     """
-    Функция генерит файлы с заданным расширением и количеством в заданную папку
+    Функция генерит файлы с заданным расширением и количеством в заданную папку.
 
     :param folder: папка для файлов
     :param kwargs: именованные аргументы (ключ - тип файла, значение - количество файлов)
