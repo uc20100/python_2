@@ -110,7 +110,7 @@ from file_func.task_home_work import rename_file
 # ✔ Соберите из созданных на уроке и в рамках домашнего задания функций пакет для работы с файлами.
 
 # Создаем различные файлы
-file_dict = dict(txt=5, doc=1, pdf=2, js=3, avi=2, mp3=4, jpg=3, bmp=2, xlsm=4)
+file_dict = dict(txt=15, doc=1, pdf=2, js=3, avi=2, mp3=4, jpg=3, bmp=2, xlsm=4)
 any_file_generator_to_folder('new_folder', **file_dict)
 
 # Сортируем файлы

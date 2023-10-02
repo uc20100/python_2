@@ -49,7 +49,7 @@ def rename_file(folder: str, type_file_original: str, name: str = None, n_digits
                         new_name_file += name
                     else:
                         new_name_file = name
-                new_name_file += f'{str(count):0{n_digits}}'[::-1]
+                new_name_file += f'{str(count)}'.rjust(n_digits, '0')
                 if type_file_new:
                     new_type_file = type_file_new
                 obj.rename(p / f'{new_name_file}.{new_type_file}')
