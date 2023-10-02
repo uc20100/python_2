@@ -10,7 +10,7 @@
 # ✔ Внутри используйте вызов функции из прошлой задачи.
 
 __all__ = ['any_file_generator']
-from task_4 import file_generator
+from file_func.task_4 import file_generator
 
 
 def any_file_generator(**kwargs):
