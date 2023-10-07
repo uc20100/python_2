@@ -49,7 +49,7 @@ def create_user(file_json):
                     json_dict_2[identifier] = name
                     json_dict[f'level_{level}'] = json_dict_2
                     with open(file_json, 'w', encoding='utf-8') as f:
-                        json.dump(json_dict, f)
+                        json.dump(json_dict, f, ensure_ascii=False)
                         print('Запись выполнена')
         else:
             print('Это не натуральное число, повторите ввод')
