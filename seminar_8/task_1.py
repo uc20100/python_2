@@ -1,3 +1,6 @@
+"""
+Модуль генерации файла JSON произведения чисел
+"""
 # * Задание №1
 #   - Вспоминаем задачу 3 из прошлого семинара. Мы сформировали
 # текстовый файл с псевдо именами и произведением чисел.
@@ -6,6 +9,7 @@
 #   - Имена пишите с большой буквы.
 #   - Каждую пару сохраняйте с новой строки.
 
+__all__ = ['multiplication_json']
 from file_func.task_1 import random_number
 from file_func.task_2 import pseudonyms
 from file_func.task_3 import multiplication
