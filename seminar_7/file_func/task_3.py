@@ -38,19 +38,17 @@ def multiplication(number_file: str, pseudonyms_file: str, result_file):
         end_pf = False
         while True:
             if not (nf_read := nf.readline()[:-1]):
+                end_nf = True
+                nf.seek(0, 0)
+                nf_read = nf.readline()[:-1]
                 if end_pf:
                     break
-                else:
-                    end_nf = True
-                    nf.seek(0, 0)
-                    nf_read = nf.readline()[:-1]
             if not (pf_read := pf.readline()[:-1]):
+                end_pf = True
+                pf.seek(0, 0)
+                pf_read = pf.readline()[:-1]
                 if end_nf:
                     break
-                else:
-                    end_pf = True
-                    pf.seek(0, 0)
-                    pf_read = pf.readline()[:-1]
 
             list_number = nf_read.split('|')
             mul_result = int(list_number[0]) * float(list_number[1])
