@@ -26,7 +26,6 @@ def create_user(file_json):
     :param file_json: JSON файл
     :return:
     """
-    wr_status = False
     while True:
         name, identifier, level = input('Введите через пробел Имя, идентификатор, уровень доступа (1-7): ').split()
 
@@ -35,25 +34,25 @@ def create_user(file_json):
                 print('Уровень доступа должен быть от 1 до 7')
             else:
                 json_dict = dict()
-                json_dict_2 = dict()
                 if Path(Path.cwd() / file_json).is_file():
                     with open(file_json, 'r', encoding='utf-8') as fj:
                         json_dict = json.load(fj)
-                if f'level_{level}' in json_dict.keys():
-                    if identifier in json_dict[f'level_{level}'].keys():
+                for key_level in json_dict:
+                    if identifier in json_dict[key_level].keys():
                         print('Такой идентификатор уже есть (')
-                    else:
-                        json_dict_2 = json_dict[f'level_{level}']
-                        wr_status = True
+                        break
                 else:
-                    wr_status = True
-                if wr_status:
-                    wr_status = False
+                    if f'level_{level}' in json_dict:
+                        json_dict_2 = json_dict[f'level_{level}']
+                    else:
+                        json_dict_2 = {}
+                    json_dict_2[identifier] = name
+                    json_dict[f'level_{level}'] = json_dict_2
                     with open(file_json, 'w', encoding='utf-8') as f:
-                        json_dict_2[identifier] = name
-                        json_dict[f'level_{level}'] = json_dict_2
                         json.dump(json_dict, f)
                         print('Запись выполнена')
+        else:
+            print('Это не натуральное число, повторите ввод')
 
 
 if __name__ == '__main__':
