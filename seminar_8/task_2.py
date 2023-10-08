@@ -27,33 +27,36 @@ def create_user(file_json):
     :return:
     """
     while True:
-        name, identifier, level = input('Введите через пробел Имя, идентификатор, уровень доступа (1-7): ').split()
-
-        if level.isdigit():
-            if not (1 <= int(level) <= 7):
-                print('Уровень доступа должен быть от 1 до 7')
-            else:
-                json_dict = dict()
-                if Path(Path.cwd() / file_json).is_file():
-                    with open(file_json, 'r', encoding='utf-8') as fj:
-                        json_dict = json.load(fj)
-                for key_level in json_dict:
-                    if identifier in json_dict[key_level].keys():
-                        print('Такой идентификатор уже есть (')
-                        break
+        list_value = list(input('Введите через пробел Имя, идентификатор, уровень доступа (1-7): ').split())
+        if len(list_value) == 3:
+            name, identifier, level = list_value
+            if level.isdigit():
+                if not (1 <= int(level) <= 7):
+                    print('Уровень доступа должен быть от 1 до 7')
                 else:
-                    if f'level_{level}' in json_dict:
-                        json_dict_2 = json_dict[f'level_{level}']
+                    json_dict = dict()
+                    if Path(Path.cwd() / file_json).is_file():
+                        with open(file_json, 'r', encoding='utf-8') as fj:
+                            json_dict = json.load(fj)
+                    for key_level in json_dict:
+                        if identifier in json_dict[key_level].keys():
+                            print('Такой идентификатор уже есть (')
+                            break
                     else:
-                        json_dict_2 = {}
-                    json_dict_2[identifier] = name
-                    json_dict[f'level_{level}'] = json_dict_2
-                    with open(file_json, 'w', encoding='utf-8') as f:
-                        json.dump(json_dict, f, ensure_ascii=False)
-                        print('Запись выполнена')
+                        if f'level_{level}' in json_dict:
+                            json_dict_2 = json_dict[f'level_{level}']
+                        else:
+                            json_dict_2 = {}
+                        json_dict_2[identifier] = name
+                        json_dict[f'level_{level}'] = json_dict_2
+                        with open(file_json, 'w', encoding='utf-8') as f:
+                            json.dump(json_dict, f, ensure_ascii=False)
+                            print('Запись выполнена')
+            else:
+                print('Это не натуральное число, повторите ввод')
         else:
-            print('Это не натуральное число, повторите ввод')
+            print('Вы ввели не три параметра, повторите ввод')
 
 
 if __name__ == '__main__':
-    create_user('my_json')
+    create_user('my_json.txt')
