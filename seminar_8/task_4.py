@@ -43,4 +43,4 @@ def convert_to_json(file_csv: str, file_json: str):
 
 
 if __name__ == '__main__':
-    convert_to_json('my_csv.csv', 'new_json.txt')
+    convert_to_json('my_file.csv', 'new_file.json')

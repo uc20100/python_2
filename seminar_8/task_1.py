@@ -42,10 +42,10 @@ random_number('numbers.txt', 8)
 pseudonyms('pseudonyms.txt', 5)
 multiplication('numbers.txt', 'pseudonyms.txt', 'multiplication.txt')
 # Формируем файл JSON
-multiplication_json('multiplication.txt', 'multiplication_json.txt')
+multiplication_json('multiplication.txt', 'multiplication.json')
 
 
 if __name__ == '__main__':
-    with open('multiplication_json.txt', 'r', encoding='utf-8') as f:
+    with open('multiplication.json', 'r', encoding='utf-8') as f:
         new_dict = json.load(f)
     print(f'{new_dict = }')

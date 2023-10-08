@@ -59,4 +59,4 @@ def create_user_json(file_json):
 
 
 if __name__ == '__main__':
-    create_user_json('my_json.txt')
+    create_user_json('my_file.json')
