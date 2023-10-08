@@ -14,12 +14,12 @@
 # 📌 При перезапуске функции уже записанные в файл данные
 # должны сохраняться.
 
-__all__ = ['create_user']
+__all__ = ['create_user_json']
 from pathlib import Path
 import json
 
 
-def create_user(file_json):
+def create_user_json(file_json):
     """
     Функция создает пользователей и сохраняет их в JSON файл
 
@@ -59,4 +59,4 @@ def create_user(file_json):
 
 
 if __name__ == '__main__':
-    create_user('my_json.txt')
+    create_user_json('my_json.txt')
