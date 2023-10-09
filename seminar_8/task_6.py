@@ -23,7 +23,7 @@ def pickle_to_csv(file_pickle: str, file_csv: str):
     :return:
     """
     with (open(file_pickle, 'rb') as f_read,
-          open(file_csv, 'w', encoding='utf-8') as f_write):
+          open(file_csv, 'w', newline='', encoding='utf-8') as f_write):
         load_ = pickle.load(f_read)
         csv_write = csv.writer(f_write, dialect='excel', delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         csv_write.writerow(list(load_[0].keys()))
