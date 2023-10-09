@@ -35,7 +35,7 @@ def rename_file(folder: str, type_file_original: str, name: str = None, n_digits
     """
 
     p = Path(Path.cwd() / folder)
-    count = 0
+    count = 1
     for obj in p.iterdir():
         if obj.is_file():
             *_, name_file_all = str(obj).split('\\')
