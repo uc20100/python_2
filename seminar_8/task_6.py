@@ -32,4 +32,4 @@ def pickle_to_csv(file_pickle: str, file_csv: str):
 
 
 if __name__ == '__main__':
-    pickle_to_csv('test_folder\\new_file.pickle', 'test_folder\\new_file.csv')
+    pickle_to_csv('test_folder\\user_upgrade.pickle', 'test_folder\\user_upgrade.csv')
