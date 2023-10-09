@@ -13,10 +13,10 @@ import pickle
 
 def read_csv(file_csv: str) -> tuple[bytes, bytes]:
     """
-    Функция читает CSV файл и распечатывает как pickle строку
+    Функция читает CSV файл и возвращает байтовый список
 
     :param file_csv: CSV файл
-    :return: байтовая строка [0] - CSV файл, [1] - словарь
+    :return: байтовая строка: [0] - CSV файл, [1] - словарь
     """
     result_str = ''
     with open(file_csv, 'r', encoding='utf-8') as f_read:
