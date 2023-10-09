@@ -27,7 +27,11 @@ def create_user_json(file_json):
     :return:
     """
     while True:
-        list_value = list(input('Введите через пробел Имя, идентификатор, уровень доступа (1-7): ').split())
+        list_value = list(input('Введите через пробел Имя, идентификатор, уровень доступа (1-7) '
+                                'или "q" для выхода из цикла: ').split())
+        if len(list_value) == 1 and str(list_value[0]).lower() == 'q':
+            print('Выход из цикла')
+            break
         if len(list_value) == 3:
             name, identifier, level = list_value
             if level.isdigit():
@@ -55,7 +59,7 @@ def create_user_json(file_json):
             else:
                 print('Это не натуральное число, повторите ввод')
         else:
-            print('Вы ввели не три параметра, повторите ввод')
+            print('Вы ввели не три параметра или "q" для выхода из цикла, повторите ввод')
 
 
 if __name__ == '__main__':
