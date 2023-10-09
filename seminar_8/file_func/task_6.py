@@ -28,13 +28,6 @@ def _file_generator_to_folder(us_folder: str, type_file: str, min_name: int = 6,
     :return:
     """
     count = 0
-    p = Path(Path().cwd())
-
-    for obj in p.iterdir():
-        if obj == Path().cwd() / us_folder and obj.is_dir():
-            break
-    else:
-        Path(us_folder).mkdir()
     p = Path(Path().cwd() / us_folder)
 
     while count < n_file:
@@ -62,10 +55,18 @@ def any_file_generator_to_folder(folder: str, **kwargs):
     :param kwargs: именованные аргументы (ключ - тип файла, значение - количество файлов)
     :return:
     """
+    # p = Path(Path().cwd())
+    #
+    # for obj in p.iterdir():
+    #     if obj == Path().cwd() / folder and obj.is_dir():
+    #         break
+    # else:
+    #     Path(Path().cwd() / folder).mkdir()
+
     for type_f, n_f in kwargs.items():
         _file_generator_to_folder(us_folder=folder, type_file=type_f, n_file=n_f)
 
 
 if __name__ == '__main__':
     file_dict = dict(txt=3, doc=1, pdf=2)
-    any_file_generator_to_folder('new_folder', **file_dict)
+    any_file_generator_to_folder('new_folder\\other', **file_dict)
