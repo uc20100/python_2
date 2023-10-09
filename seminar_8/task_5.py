@@ -46,9 +46,9 @@ if __name__ == '__main__':
     # Копируем файлы JSON из текущей директории в новую
     for obj in p.iterdir():
         if obj.is_file():
-            *_, name_file_all = str(obj).split('\\')
-            *_, type_file = name_file_all.split('.')
-            if type_file == 'json':
-                shutil.copy(name_file_all, folder_)
+            *_, name_file_all_ = str(obj).split('\\')
+            *_, type_file_ = name_file_all_.split('.')
+            if type_file_ == 'json':
+                shutil.copy(name_file_all_, folder_)
     # преобразовываем json в pickle
     json_to_pickle(folder_)
