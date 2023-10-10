@@ -127,7 +127,7 @@ sort_fl = dict(Видео=['avi', 'mp4'], Изображения=['bmp', 'jpg', 
 generate_folder_and_file(directory=GENERATE_FOLDER, file_dict=file_gen, sort_dict=sort_fl, file_name='file_')
 # Создаём отчёты о файлах и каталогах
 inf_fl, *_ = GENERATE_FOLDER.split('\\')
-info_folder(inf_fl, 'report_folder.json', 'report_folder.json.csv', 'report_folder.json.pickle')
+info_folder(inf_fl, 'report_folder.json', 'report_folder.csv', 'report_folder.pickle')
 # Проверяем на чтение pickle файл
-with (open('report_folder.json.pickle', 'rb') as f_read):
+with (open('report_folder.pickle', 'rb') as f_read):
     print(f'Проверка чтения инфы о каталогах: {pickle.load(f_read) = }')
