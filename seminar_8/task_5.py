@@ -6,20 +6,19 @@
 # директории и сохраняет их содержимое в виде
 # одноимённых pickle файлов.
 
-__all__ = ['json_to_pickle']
+__all__ = ['json_to_pickle', 'clear_and_copy']
 
 import json
 from pathlib import Path
-if __name__ == '__main__':
-    import shutil
+import shutil
 import pickle
 
 
 def json_to_pickle(folder: str):
     """
-    Функция сохраняет JSON файлы в одноименные pickle файлы
+    Функция сохраняет JSON файлы в одноименные pickle файлы.
 
-    :param folder: папка в которой будем делать преобразование
+    :param folder: Папка в которой будем делать преобразование
     :return:
     """
     p = Path(Path.cwd() / folder)
@@ -34,9 +33,14 @@ def json_to_pickle(folder: str):
                     pickle.dump(read_json, f_write)
 
 
-if __name__ == '__main__':
+def clear_and_copy(folder_: str):
+    """
+    Функция очищает папку и копирует туда JSON файлы.
+
+    :param folder_: Папка с которой происходят манипуляции
+    :return:
+    """
     # Удаляем папку если она есть и снова её создаём
-    folder_ = 'test_folder'
     p = Path(Path().cwd())
     for obj in p.iterdir():
         if obj == Path().cwd() / folder_ and obj.is_dir():
@@ -50,5 +54,11 @@ if __name__ == '__main__':
             *_, type_file_ = name_file_all_.split('.')
             if type_file_ == 'json':
                 shutil.copy(name_file_all_, folder_)
+
+
+if __name__ == '__main__':
+    dir_ = 'test_folder'
+    # Подготавливаем директорию
+    clear_and_copy(dir_)
     # преобразовываем json в pickle
-    json_to_pickle(folder_)
+    json_to_pickle(dir_)
