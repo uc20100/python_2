@@ -59,12 +59,12 @@ def multiplication_json(in_file: str, out_file: str):
 
 if __name__ == '__main__':
     # Формируем файл с псевдоименами и произведением чисел
-    generate_multiplication_file('numbers.txt',8, 'pseudonyms.txt',
+    generate_multiplication_file('../numbers.txt', 8, 'pseudonyms.txt',
                                  5, 'multiplication.txt')
     # Формируем файл JSON
-    multiplication_json('multiplication.txt', 'multiplication.json')
+    multiplication_json('../multiplication.txt', 'multiplication.json')
     # Печатаем JSON файл
-    with open('multiplication.json', 'r', encoding='utf-8') as f:
+    with open('../multiplication.json', 'r', encoding='utf-8') as f:
         new_dict = json.load(f)
     print(f'Файл JSON: {new_dict = }')
 
