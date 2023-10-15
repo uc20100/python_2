@@ -10,7 +10,6 @@
 # угадать загаданное число за указанное число попыток.
 
 __all__ = ['go_guess']
-
 from typing import Callable
 
 
