@@ -12,7 +12,7 @@
 from typing import Callable
 import random
 
-_all__ = ['go_guess']
+__all__ = ['guess']
 
 
 def check(func: Callable):
