@@ -9,48 +9,55 @@
 # 📌 Функция возвращает функцию, которая через консоль просит
 # угадать загаданное число за указанное число попыток.
 
-__all__ = ['start_guess']
+__all__ = ['go_guess']
 
 from typing import Callable
 
 
-def start_guess(number: int) -> Callable[[int], str]:
+def go_guess(number: int, attempts: int) -> Callable[[], str]:
     """
     Функция замыкание, угадывание числа.
 
     :param number: Загаданное число,
-    :return: возвращает функцию
+    :param attempts: число попыток,
+    :return: возвращает функцию.
     """
-    status = False
+    return_str = None
     if not (1 <= number <= 1_000):
-        print('Число должно быть в пределах от 1 до 1_000.')
+        return_str = 'Значение number должно быть в пределах от 1 до 1_000.'
     else:
-        status = True
+        if not (1 <= attempts <= 10):
+            return_str = 'Значение attempts должно быть в пределах от 1 до 10.'
 
-    def guess(attempts: int) -> str:
+    def guess() -> str:
         """
         Функция угадывания числа.
 
-        :param attempts: Число попыток,
-        :return: возвращает строковый результат.
+        :return: Возвращает строковый результат.
         """
-        if status:
-            if 1 <= attempts <= 10:
-                for i in range(attempts):
-                    number_ = input(f'Введите число: ')
-                    if number_.isdigit():
-                        if number == int(number_):
-                            return 'Ура вы угадали!'
-                        else:
-                            print(f'Не угадали, осталось {attempts - i - 1} попыток.')
+        nonlocal return_str
+        if not return_str:
+            for i in range(attempts):
+                number_ = input(f'Введите число: ')
+                if number_.isdigit():
+                    if number == int(number_):
+                        return_str = 'Ура вы угадали!'
+                        break
                     else:
-                        print(f'Введите натуральное число. Осталось {attempts - i - 1} попыток.')
+                        if attempts - i - 1:
+                            print(f'Не угадали, осталось {attempts - i - 1} попыток.')
+                        else:
+                            return_str = 'Не угадали, попытки исчерпаны'
                 else:
-                    return 'Попытки исчерпаны ('
-        return 'Параметры функции ошибочны.'
+                    if attempts - i - 1:
+                        print(f'Введите натуральное число. Осталось {attempts - i - 1} попыток.')
+                    else:
+                        return_str = 'Не угадали, попытки исчерпаны'
+        return return_str
 
     return guess
 
 
-func = start_guess(100)
-print(func(5))
+if __name__ == '__main__':
+    func = go_guess(100, 3)
+    print(func())
