@@ -97,7 +97,7 @@ def count_print(count: int = 5):
 
 
 @count_print(3)
-@save_json()
+@save_json('guess.json')
 @check
 def guess(number: int, attempts: int, /, *, inf_str: str):
     """
