@@ -25,13 +25,13 @@ def check(func: Callable):
     :return: возвращает функцию.
     """
 
-    def check_setting(*args):
+    def check_setting(*args, **kwargs):
         num, att = args
         if not (1 <= num <= 1_000):
             num = random.randint(1, 1_000)
         if not (1 <= att <= 10):
             att = random.randint(1, 10)
-        return func(num, att)
+        return func(num, att, **kwargs)
 
     return check_setting
 
@@ -101,29 +101,30 @@ def count_print(count: int = 5):
 @count_print(3)
 @save_json()
 @check
-def guess(number: int, attempts: int):
+def guess(number: int, attempts: int, /, *, inf_str: str):
     """
     Функция угадывания числа.
 
     :param number: Загаданное число,
-    :param attempts: количество попыток.
+    :param attempts: количество попыток,
+    :param inf_str: информационная строка.
     """
     for i in range(attempts):
         number_ = input(f'Введите число: ')
         if number_.isdigit():
             if number == int(number_):
-                return 'Ура вы угадали!'
+                return inf_str + 'Ура вы угадали!'
             else:
                 if attempts - i - 1:
                     print(f'Не угадали, осталось {attempts - i - 1} попыток.')
                 else:
-                    return 'Не угадали, попытки исчерпаны'
+                    return inf_str + 'Не угадали, попытки исчерпаны'
         else:
             if attempts - i - 1:
                 print(f'Введите натуральное число. Осталось {attempts - i - 1} попыток.')
             else:
-                return 'Не угадали, попытки исчерпаны'
+                return inf_str + 'Не угадали, попытки исчерпаны'
 
 
 if __name__ == '__main__':
-    guess(100, 3)
+    guess(100, 3, inf_str='Результат: ')
