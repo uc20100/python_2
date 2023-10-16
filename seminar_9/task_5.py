@@ -46,7 +46,6 @@ def save_json(write_fie: str = 'info_decor.json'):
 
     def wrapper_1(func: Callable):
 
-        # @wraps(func)
         def write_json(*args, **kwargs):
             """
             Функция записи JSON файла.
