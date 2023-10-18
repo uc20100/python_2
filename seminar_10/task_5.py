@@ -12,7 +12,7 @@ class Birds:
         self.habitat_birds = 'air'
 
     def view_habitat_birds(self):
-        print(self.habitat_birds)
+        print(f'{self.habitat_birds = }')
 
 
 class Fish:
@@ -21,7 +21,7 @@ class Fish:
         self.habitat_fish = 'water'
 
     def view_habitat_fish(self):
-        print(self.habitat_fish)
+        print(f'{self.habitat_fish = }')
 
 
 class Human:
@@ -30,7 +30,7 @@ class Human:
         self.habitat_human = 'ground'
 
     def view_habitat_human(self):
-        print(self.habitat_human)
+        print(f'{self.habitat_human = }')
 
 
 if __name__ == '__main__':
