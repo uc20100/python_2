@@ -14,6 +14,9 @@ class Birds:
     def view_habitat_birds(self):
         print(f'{self.habitat_birds = }')
 
+    def view_planet(self):
+        print(f'{self.planet = }')
+
 
 class Fish:
     def __init__(self):
@@ -23,24 +26,30 @@ class Fish:
     def view_habitat_fish(self):
         print(f'{self.habitat_fish = }')
 
+    def view_planet(self):
+        print(f'{self.planet = }')
 
-class Human:
+
+class Cat:
     def __init__(self):
         self.planet = 'Earth'
-        self.habitat_human = 'ground'
+        self.habitat_cat = 'ground'
 
     def view_habitat_human(self):
-        print(f'{self.habitat_human = }')
+        print(f'{self.habitat_cat = }')
+
+    def view_planet(self):
+        print(f'{self.planet = }')
 
 
 if __name__ == '__main__':
     birds = Birds()
     fish = Fish()
-    human = Human()
+    cat = Cat()
 
-    print(f'{birds.planet = }')
+    birds.view_planet()
     birds.view_habitat_birds()
-    print(f'{fish.planet = }')
+    fish.view_planet()
     fish.view_habitat_fish()
-    print(f'{human.planet = }')
-    human.view_habitat_human()
+    cat.view_planet()
+    cat.view_habitat_human()
