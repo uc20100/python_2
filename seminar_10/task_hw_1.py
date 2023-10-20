@@ -69,11 +69,11 @@ class Mammal(Animal):
 class AnimalFactory:
     def create_animal(self, *args):
         if self == 'Bird':
-            return Bird(args[0], args[1])
+            return Bird(*args)
         elif self == 'Fish':
-            return Fish(args[0], args[1])
+            return Fish(*args)
         elif self == 'Mammal':
-            return Mammal(args[0], args[1])
+            return Mammal(*args)
         else:
             raise ValueError('Недопустимый тип животного')
 
