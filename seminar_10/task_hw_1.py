@@ -25,7 +25,6 @@
 # типа с переданными параметрами.
 
 class Animal:
-
     def __init__(self, name):
         self.name = name
 
@@ -54,7 +53,6 @@ class Fish(Animal):
 
 
 class Mammal(Animal):
-
     def __init__(self, name, weight):
         self.weight = weight
         super().__init__(name)
@@ -69,7 +67,6 @@ class Mammal(Animal):
 
 
 class AnimalFactory:
-
     def create_animal(self, *args):
         if self == 'Bird':
             return Bird(args[0], args[1])
@@ -93,4 +90,3 @@ if __name__ == '__main__':
     print(animal2.depth())
     print(animal3.category())
     # print(animal4.category())
-
