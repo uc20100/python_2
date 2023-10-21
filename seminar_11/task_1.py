@@ -17,4 +17,4 @@ class MyStr(str):
 
 if __name__ == '__main__':
     one_str = MyStr('Hello world!', 'Evgeny Egipti')
-    print(f'{one_str.upper() = }, {one_str.author = }, {one_str.time = }')
+    print(f'{one_str.upper() = }, {one_str.author.lower() = }, {one_str.time = }')
