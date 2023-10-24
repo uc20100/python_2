@@ -36,10 +36,10 @@ class MyStr(str):
         return instance
 
     def __str__(self):
-        return self + f' (Автор: {self.author}, Время создания: {self.time})'
+        return f'{super().__str__()} (Автор: {self.author}, Время создания: {self.time})'
 
     def __repr__(self):
-        return f"{MyStr.__name__}('" + self + f"', '{self.author}')"
+        return f"{MyStr.__name__}('{super().__str__()}', '{self.author}')"
 
 
 if __name__ == '__main__':
