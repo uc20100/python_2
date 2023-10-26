@@ -49,23 +49,57 @@
 # Методы __str__ и __repr__ предоставляют строковое представление объекта класса Rectangle.
 
 class Rectangle:
+    """
+    Класс, представляющий прямоугольник.
+
+    Атрибуты:
+    - width (int): ширина прямоугольника
+    - height (int): высота прямоугольника
+
+    Методы:
+    - perimeter(): вычисляет периметр прямоугольника
+    - area(): вычисляет площадь прямоугольника
+    - __add__(other): определяет операцию сложения двух прямоугольников
+    - __sub__(other): определяет операцию вычитания одного прямоугольника из другого
+    - __lt__(other): определяет операцию "меньше" для двух прямоугольников
+    - __eq__(other): определяет операцию "равно" для двух прямоугольников
+    - __le__(other): определяет операцию "меньше или равно" для двух прямоугольников
+    - __str__(): возвращает строковое представление прямоугольника
+    - __repr__(): возвращает строковое представление прямоугольника, которое может быть использовано для создания нового объекта
+    """
     def __init__(self, length, width=None):
         self.length = length
         self.width = width
 
     def perimeter(self):
+        """
+        Вычисляет периметр прямоугольника.
+
+        :return: периметр прямоугольника
+        """
         if self.width is None:
             return 4 * self.length
         else:
             return 2 * (self.length + self.width)
 
     def area(self):
+        """
+        Вычисляет площадь прямоугольника.
+
+        :return: площадь прямоугольника
+        """
         if self.width is None:
             return self.length ** 2
         else:
             return self.length * self.width
 
     def __add__(self, other):
+        """
+        Определяет операцию сложения двух прямоугольников.
+
+        :param other: второй прямоугольник (Rectangle)
+        :return: новый прямоугольник, полученный путем сложения двух исходных прямоугольников
+        """
         if self.width is None:
             s_width = self.length
         else:
@@ -80,6 +114,12 @@ class Rectangle:
             return Rectangle((self.length + other.length), (s_width + o_width))
 
     def __sub__(self, other):
+        """
+        Определяет операцию вычитания одного прямоугольника из другого.
+
+        :param other: вычитаемый прямоугольник (Rectangle)
+        :return: новый прямоугольник, полученный путем вычитания вычитаемого прямоугольника из исходного
+        """
         if self.width is None:
             s_width = self.length
         else:
@@ -94,21 +134,49 @@ class Rectangle:
             return Rectangle(abs(self.length - other.length), abs(s_width - o_width))
 
     def __eq__(self, other):
+        """
+        Определяет операцию "равно" для двух прямоугольников.
+
+        :param other: второй прямоугольник (Rectangle)
+        :return: True, если равны, иначе False
+        """
         return self.length == other.length and self.perimeter() == other.perimeter()
 
     def __lt__(self, other):
+        """
+        Определяет операцию "меньше" для двух прямоугольников.
+
+        :param other: второй прямоугольник (Rectangle)
+        :return: True, если периметр первого прямоугольника меньше периметра второго, иначе False
+        """
         return self.perimeter() < other.perimeter()
 
     def __le__(self, other):
+        """
+        Определяет операцию "меньше или равно" для двух прямоугольников.
+
+        :param other: второй прямоугольник (Rectangle)
+        :return: True, если периметр первого прямоугольника меньше или равно периметру второго, иначе False
+        """
         return self.perimeter() <= other.perimeter()
 
     def __str__(self):
+        """
+        Возвращает строковое представление прямоугольника.
+
+        :return: строковое представление прямоугольника
+        """
         if self.width is None:
             return f'Квадрат со стороной {self.length}'
         else:
             return f'Прямоугольник со сторонами {self.length} и {self.width}'
 
     def __repr__(self):
+        """
+        Возвращает строковое представление прямоугольника, которое может быть использовано для создания нового объекта.
+
+        :return: строковое представление прямоугольника
+        """
         return f'{Rectangle.__name__}({self.length}, {self.width})'
 
 
@@ -137,18 +205,3 @@ if __name__ == '__main__':
     print(repr(rect1))
     print(repr(rect2))
 
-
-
-# Прямоугольник со сторонами 4 и 5
-# Прямоугольник со сторонами 3 и 3
-# 18
-# 20
-# 12
-# 9
-# Прямоугольник со сторонами 7 и 8
-# Прямоугольник со сторонами 1 и 2
-# False
-# False
-# False
-# Rectangle(4, 5)
-# Rectangle(3, 3)
