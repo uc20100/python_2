@@ -131,7 +131,7 @@ class Matrix:
                         _matrix.data[i][k] = item
             return _matrix
         else:
-            return False
+            raise ValueError("Количество столбцов первой матрицы должно быть равно количеству строк второй матрицы")
 
 
 if __name__ == '__main__':
