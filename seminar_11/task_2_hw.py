@@ -30,6 +30,15 @@
 # с использованием метода __new__.
 
 class Archive:
+    """
+    Класс, представляющий архив текстовых и числовых записей.
+
+    Атрибуты:
+    - archive_text (list): список архивированных текстовых записей.
+    - archive_number (list): список архивированных числовых записей.
+    - text (str): текущая текстовая запись для добавления в архив.
+    - number (int или float): текущая числовая запись для добавления в архив.
+    """
     archive_text = []
     archive_number = []
     _text = None
@@ -49,19 +58,23 @@ class Archive:
         return instance
 
     def __str__(self):
+        """
+         Возвращает строковое представление записей.
+
+        :return: строковое представление записей
+        """
         return f'Text is {self._text} and number is {self._number}. Also {self.archive_text} and {self.archive_number}'
 
     def __repr__(self):
+        """
+         Возвращает строковое представление записей, которое может быть использовано для создания нового объекта.
+
+        :return: строковое представление записей, которое может быть использовано для создания нового объекта
+        """
         return f"{Archive.__name__}({self.archive_text}, '{self.archive_number}')"
 
 
 if __name__ == '__main__':
-    # archive1 = Archive("Запись 1", 42)
-    # print(archive1)
-    # archive2 = Archive("Запись 2", 3.14)
-    #
-    # print(archive2)
-    # print(repr(archive1))
 
     archive1 = Archive("First Text", 1)
     print(archive1)
@@ -70,19 +83,4 @@ if __name__ == '__main__':
     archive3 = Archive("Third Text", 3)
     print(archive1)
     print(archive3)
-    # Text is First Text and number is 1. Also [] and []
-    # Text is Second Text and number is 2. Also ['First Text'] and [1]
-    # Text is Third Text and number is 3. Also ['First Text', 'Second Text'] and [1, 2]
-    # Text is Third Text and number is 3. Also ['First Text', 'Second Text'] and [1, 2]
 
-    # archive1 = Archive("First Text", 1)
-    # archive2 = Archive("Second Text", 2)
-    # archive3 = Archive("Third Text", 3)
-    # print(archive1.archive_text)  # Выведет: ['First Text', 'Third Text']
-    # print(archive1.archive_number)  # Выведет: [1, 3]
-    # print(archive2.archive_text)  # Выведет: ['First Text', 'Second Text']
-    # print(archive2.archive_number)
-    # ['First Text', 'Second Text']
-    # [1, 2]
-    # ['First Text', 'Second Text']
-    # [1, 2]
