@@ -1,6 +1,3 @@
-"""
-Модуль домашнего задания.
-"""
 # Создайте функцию generate_csv_file(file_name, rows), которая будет генерировать по три случайны числа в каждой
 # строке, от 100-1000 строк, и записывать их в CSV-файл. Функция принимает два аргумента:
 #
@@ -26,63 +23,46 @@
 # Таким образом, после выполнения функций generate_csv_file и find_roots в файле results.json будет сохранена
 # нформация о параметрах и результатах вычислений для каждой строки данных из CSV-файла.
 
-
-import random
 import csv
 import json
-from typing import Callable
-
-__all__ = ['save_to_json', 'generate_csv_file', 'find_roots']
+import random
 
 
-def save_to_json(func: Callable):
-    def calc(*args, **kwargs):
-        with open(args[0], 'r', encoding='utf-8') as f_read, open('results.json', 'w', encoding='utf-8') as f_write:
-            csv_read = list(csv.reader(f_read))
-            json_list = []
-            for item in csv_read:
-                a, b, c = item
-                a, b, c = int(a), int(b), int(c)
-                result_func = func(a, b, c)
-                json_list.append({'a': a, 'b': b, 'c': c, 'result': result_func})
-            json.dump(json_list, f_write)
+def save_to_json(func):
+    def wrapper(*args):
+        result_list = []
+        with open(args[0], 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                a, b, c = map(int, row)
+                result = func(a, b, c)
+                data = {'parameters': [a, b, c], 'result': result}
+                result_list.append(data)
+        with open('results.json', 'w') as f:
+            json.dump(result_list, f)
 
-    return calc
-
-
-def generate_csv_file(csv_wr: str, rows: int):
-    """
-    Функция генерации 3-х рандомных чисел.
-
-    :param csv_wr: Файл данных CSV
-    :param rows: Количество строк
-    :return:
-    """
-    with open(csv_wr, 'w', encoding='utf-8', newline='') as f_write:
-        csv_write = csv.writer(f_write, dialect='excel', delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        for _ in range(rows):
-            date_list = [random.randint(1, 100) for _ in range(3)]
-            csv_write.writerow(date_list)
+    return wrapper
 
 
 @save_to_json
-def find_roots(a: int, b: int, c: int):
-    """
-    Решение квадратного уравнения ax^2 + bx + c = 0.
-
-    :param a: Коэффициент а,
-    :param b: Коэффициент b,
-    :param c: Коэффициент c,
-    :return: корни квадратного уравнения.
-    """
-    # дискриминант - D = b^2 − 4ac
-    d = b * b - 4 * a * c
-    if d == 0:
+def find_roots(a, b, c):
+    d = b ** 2 - 4 * a * c
+    if d < 0:
+        return None
+    elif d == 0:
         return -b / (2 * a)
-    elif d > 0:
-        return (-b + d ** 0.5) / (2 * a), (-b - d ** 0.5) / (2 * a)
     else:
-        return False
+        x1 = (-b + d ** 0.5) / (2 * a)
+        x2 = (-b - d ** 0.5) / (2 * a)
+        return x1, x2
+
+
+def generate_csv_file(file_name, rows):
+    with open(file_name, 'w', newline='') as f:
+        writer = csv.writer(f)
+        for i in range(rows):
+            row = [random.randint(1, 1000) for _ in range(3)]
+            writer.writerow(row)
 
 
 if __name__ == '__main__':
@@ -97,4 +77,4 @@ if __name__ == '__main__':
     else:
         print(f"Количество строк в файле не находится в диапазоне от 100 до 1000.")
 
-    print(len(data) == 1501)
+    print(len(data) == 1500)
