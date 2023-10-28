@@ -114,6 +114,7 @@ class Generator:
             factorial = 1
             for _i in range(1, self._count + 1):
                 factorial *= _i
+            print(f'Факториал числа: {self._count}, равен: {factorial:_}')
             self._count += self.step
             return factorial
         raise StopIteration
