@@ -72,9 +72,7 @@ class Generator:
     start (int): конечное значение числа
     step (int): шаг генерации
 
-
     Dunder методы:
-    __init__(self, stop: int, start: int = 1, step: int = 1):: инициализация объекта.
     __iter__(self): итератор объекта.
     __next__(self): шаг итератора.
     """
@@ -84,13 +82,6 @@ class Generator:
     step = Value()
 
     def __init__(self, stop: int, start: int = 1, step: int = 1):
-        """
-        Функция инициализации объекта.
-
-        :param stop:
-        :param start:
-        :param step:
-        """
         self.stop = stop
         self.start = start
         self.step = step
