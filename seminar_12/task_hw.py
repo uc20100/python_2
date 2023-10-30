@@ -85,8 +85,7 @@ class Value:
 
     def __set__(self, instance, value):
         if self.min_value is None and self.max_value is None:
-            val = value.replace(' ', '')
-            if value.istitle() and val.isalpha():
+            if value.istitle() and value.replace(' ', '').isalpha():
                 setattr(instance, self.param_name, value)
             else:
                 raise ValueError('ФИО должно состоять только из букв и начинаться с заглавной буквы')
@@ -128,8 +127,7 @@ class Student:
         self.name = name
         self.subjects = dict(rating={}, test={})
         with open(subjects_file, 'r', encoding='utf-8') as f_read:
-            for item in f_read:
-                list_subjects = item[:-1].split(',')
+            list_subjects = f_read.read()[:-1].split(',')
             for item in list_subjects:
                 self.subjects['rating'][item] = []
                 self.subjects['test'][item] = []
@@ -208,7 +206,7 @@ class Student:
 
 
 if __name__ == '__main__':
-    student = Student("Иван Иванов", "subjects.csv")
+    student = Student(" Иван Иванов", "subjects.csv")
 
     student.add_grade("Математика", 4)
     student.add_test_score("Математика", 85)
@@ -227,7 +225,7 @@ if __name__ == '__main__':
 
     student = Student("Сидоров Сидор", "subjects.csv")
 
-    average_history_score = student.get_average_test_score("Биология")
+    # average_history_score = student.get_average_test_score("Биология")
 
 # Средний балл: 4.5
 # Средний результат по тестам по математике: 85.0
