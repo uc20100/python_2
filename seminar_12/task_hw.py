@@ -140,7 +140,7 @@ class Student:
 
         :return:
         """
-        ret_str = f'{self.name}\nПредметы:'
+        ret_str = f'Студент: {self.name}\nПредметы:'
         for item in self.subjects['rating']:
             if self.subjects['rating'][item]:
                 ret_str += f' {item},'
@@ -183,7 +183,12 @@ class Student:
         :param subject: предмет,
         :return: средний балл.
         """
-        return sum(self.subjects['test'][subject]) / len(self.subjects['test'][subject])
+        if not (subject in self.subjects['test'].keys()):
+            raise ValueError(f'Предмет {subject} не найден')
+        if len(self.subjects['test'][subject]) > 0:
+            return sum(self.subjects['test'][subject]) / len(self.subjects['test'][subject])
+        else:
+            return 0
 
     def get_average_grade(self):
         """
@@ -196,7 +201,10 @@ class Student:
         for _, val in self.subjects['rating'].items():
             sum_ += sum(val)
             len_ += len(val)
-        return sum_ / len_
+        if len_ > 0:
+            return sum_ / len_
+        else:
+            return 0
 
 
 if __name__ == '__main__':
@@ -215,6 +223,11 @@ if __name__ == '__main__':
     print(f"Средний результат по тестам по математике: {average_test_score}")
 
     print(student)
+    print(student.get_average_test_score("Литература"))
+
+    student = Student("Сидоров Сидор", "subjects.csv")
+
+    average_history_score = student.get_average_test_score("Биология")
 
 # Средний балл: 4.5
 # Средний результат по тестам по математике: 85.0
