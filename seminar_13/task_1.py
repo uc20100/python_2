@@ -19,7 +19,7 @@ def input_number():
             try:
                 return float(in_str)
             except ValueError:
-                raise ValueError(f"Символы '{in_str}' не являются вещественным или целым числом.")
+                print(f"Символы '{in_str}' не являются вещественным или целым числом.")
 
 
 if __name__ == '__main__':
