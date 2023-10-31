@@ -8,6 +8,14 @@
 
 
 def get_dict(dict_, key, default_value):
+    """
+    Функция возвращает значение словаря.
+
+    :param dict_: словарь,
+    :param key: ключ словаря,
+    :param default_value: значение по умолчанию, если ключ отсутствует,
+    :return: значение по умолчанию или значение словаря.
+    """
     try:
         return dict_[key]
     except KeyError:
