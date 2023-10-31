@@ -56,6 +56,12 @@ def create_user_json(file_json: str = 'users.json'):
 
 
 def create_users(file_json: str = 'users.json'):
+    """
+    Функция добавляет в множества объекты класса Us, читая инфу из JSON файла.
+
+    :param file_json: JSON файл,
+    :return: возвращает множество.
+    """
     list_users = []
     try:
         with open(file_json, 'r', encoding='utf-8') as fj:
@@ -73,6 +79,14 @@ def create_users(file_json: str = 'users.json'):
 
 
 class Us:
+    """
+    Класс 'Us'
+
+     Атрибуты:
+    - self.name (str): имя пользователя,
+    - self.identifier (str): id пользователя,
+    - self.level (str): уровень доступа пользователя.
+    """
     def __init__(self, name, identifier, level):
         self.name = name
         self.identifier = identifier
