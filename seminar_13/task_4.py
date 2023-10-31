@@ -40,12 +40,12 @@ def create_user_json(file_json: str = 'users.json'):
                             print('Такой идентификатор уже есть (')
                             break
                     else:
-                        if f'level_{level}' in json_dict:
-                            json_dict_2 = json_dict[f'level_{level}']
+                        if f'{level}' in json_dict:
+                            json_dict_2 = json_dict[f'{level}']
                         else:
                             json_dict_2 = {}
                         json_dict_2[identifier] = name
-                        json_dict[f'level_{level}'] = json_dict_2
+                        json_dict[f'{level}'] = json_dict_2
                         with open(file_json, 'w', encoding='utf-8') as f:
                             json.dump(json_dict, f, ensure_ascii=False)
                             print('Запись выполнена')

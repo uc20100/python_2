@@ -9,8 +9,19 @@ class UsException(BaseException):
 
 
 class LevelException(UsException):
-    pass
+    def __init__(self, old_level, new_level):
+        self.old_level = old_level
+        self.new_level = new_level
+
+    def __str__(self):
+        return f"Ваш уровень '{self.new_level}' меньше уровня '{self.old_level}', а должен быть больше или равен"
+
 
 
 class AccessException(UsException):
-    pass
+    def __init__(self, name, identifier):
+        self.name = name
+        self.identifier = identifier
+
+    def __str__(self):
+        return f"Пользователя с именем '{self.name}' и идентификатором '{self.identifier}' нет в множестве"
