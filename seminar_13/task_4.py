@@ -65,8 +65,8 @@ def create_users(file_json: str = 'users.json'):
                 raise e
     except FileNotFoundError as e:
         raise FileNotFoundError(f"Файла '{file_json}' не найдено. {e}")
-    for lev, item in json_dict.items():
-        for ident, name in item.items():
+    for lev, item_ in json_dict.items():
+        for ident, name in item_.items():
             a = Us(name, ident, lev)
             list_users.append(a)
     return list_users
