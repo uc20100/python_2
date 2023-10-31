@@ -69,7 +69,7 @@ def create_users(file_json: str = 'users.json'):
         for ident, name in item_.items():
             a = Us(name, ident, lev)
             list_users.append(a)
-    return list_users
+    return set(list_users)
 
 
 class Us:
