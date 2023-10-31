@@ -28,7 +28,7 @@ class User:
      Методы:
     - load(self, file_json: str = 'users.json'): Загружает в множество объекты класса Us из файла JSON,
     - login_system(self, name, identifier): Проверяет наличие пользователя в множестве и возвращает уровень доступа, либо ошибку AccessException,
-    - add_user(self, name, identifier, level): Добавляет пользователя, если такой пользователь есть и новый уровень доступа меньше чем был, то выдает ошибку LevelException,
+    - add_user(self, name, identifier, level): Добавляет пользователя, если такой пользователь есть и новый уровень доступа меньше чем был, в противном случае, выдает ошибку LevelException,
 
      Dunder методы:
     - __str__(self): Возвращает строковое представление множества.
