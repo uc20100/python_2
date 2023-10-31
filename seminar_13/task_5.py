@@ -92,6 +92,10 @@ class User:
         :param level: уровень доступа пользователя,
         :return: если такой пользователь есть и его старый уровень доступа больше нового, то ошибка LevelException, в противном случае добавление.
         """
+        if not isinstance(level, int):
+            raise ValueError("Параметр 'level' должен быть натуральным числом.")
+        if not (1 <= level <= 7):
+            raise ValueError("Параметр 'level' должен находиться в пределах от 1 до 7.")
         for item in self.set_user:
             if item.identifier == identifier and item.name == name:
                 if int(item.level) > level:
