@@ -88,7 +88,7 @@ class Us:
     - self.level (str | int): уровень доступа пользователя.
 
      Dunder методы:
-    - def __init__(self, name, identifier, level): конструктор класса,
+    - __init__(self, name, identifier, level): конструктор класса,
     - __eq__(self, other): сравнение двух экземпляров класса,
     - __hash__(self): возвращает собственный hash,
     - __str__(self): возвращает строковое представление класса.
