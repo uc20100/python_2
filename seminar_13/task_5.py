@@ -33,6 +33,7 @@ class User:
      Dunder методы:
     - __str__(self): Возвращает строковое представление множества.
     """
+
     def __init__(self):
         self.set_user = None
 
@@ -96,12 +97,13 @@ class User:
             raise ValueError("Параметр 'level' должен быть натуральным числом.")
         if not (1 <= level <= 7):
             raise ValueError("Параметр 'level' должен находиться в пределах от 1 до 7.")
+
+        variant_b = Us(name, identifier, level)
         for item in self.set_user:
-            if item.identifier == identifier and item.name == name:
-                if int(item.level) > level:
-                    raise LevelException(item.level, level)
-        u = Us(name, identifier, level)
-        set.add(self.set_user, u)
+            if item == variant_b:
+                if int(item.level) > variant_b.level:
+                    raise LevelException(item.level, variant_b.level)
+        set.add(self.set_user, variant_b)
 
 
 if __name__ == '__main__':
