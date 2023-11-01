@@ -91,7 +91,7 @@ class Us:
     - def __init__(self, name, identifier, level): конструктор класса,
     - __eq__(self, other): сравнение двух экземпляров класса,
     - __hash__(self): возвращает собственный hash,
-    - __str__(self): возвращает строковое представление множества.
+    - __str__(self): возвращает строковое представление класса.
     """
     def __init__(self, name, identifier, level):
         self.name = name
