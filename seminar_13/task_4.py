@@ -85,7 +85,7 @@ class Us:
      Атрибуты:
     - self.name (str): имя пользователя,
     - self.identifier (str): id пользователя,
-    - self.level (str): уровень доступа пользователя.
+    - self.level (str | int): уровень доступа пользователя.
 
      Dunder методы:
     - def __init__(self, name, identifier, level): конструктор класса,
