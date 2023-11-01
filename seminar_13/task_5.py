@@ -78,8 +78,9 @@ class User:
         :param identifier: id пользователя,
         :return: уровень доступа или ошибка LevelException
         """
+        variant_a = Us(name, identifier, None)
         for item in self.set_user:
-            if item.identifier == identifier and item.name == name:
+            if item == variant_a:
                 return item.level
         else:
             raise AccessException(name, identifier)
