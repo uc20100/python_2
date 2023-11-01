@@ -26,12 +26,13 @@ class User:
     - self.set_user (set): множество с объектами класса Us,
 
      Методы:
-    - load(self, file_json: str = 'users.json'): Загружает в множество объекты класса Us из файла JSON,
-    - login_system(self, name, identifier): Проверяет наличие пользователя в множестве и возвращает уровень доступа, либо ошибку AccessException,
-    - add_user(self, name, identifier, level): Добавляет пользователя, если такой пользователь есть и новый уровень доступа меньше чем был, в противном случае, выдает ошибку LevelException,
+    - load(self, file_json: str = 'users.json'): загружает в множество объекты класса Us из файла JSON,
+    - login_system(self, name, identifier): проверяет наличие пользователя в множестве и возвращает уровень доступа, либо ошибку AccessException,
+    - add_user(self, name, identifier, level): добавляет пользователя, если такой пользователь есть и новый уровень доступа меньше чем был, в противном случае, выдает ошибку LevelException,
 
      Dunder методы:
-    - __str__(self): Возвращает строковое представление множества.
+    - __init__(self): конструктор класса,
+    - __str__(self): возвращает строковое представление множества.
     """
 
     def __init__(self):
