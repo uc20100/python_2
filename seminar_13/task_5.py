@@ -36,7 +36,7 @@ class User:
     """
 
     def __init__(self):
-        self.set_user = None
+        self.set_user = set()
 
     def __str__(self):
         """
@@ -56,7 +56,6 @@ class User:
         :param file_json: файл JSON.
         :return:
         """
-        list_users = []
         try:
             with open(file_json, 'r', encoding='utf-8') as fj:
                 try:
@@ -68,8 +67,7 @@ class User:
         for lev, item_ in json_dict.items():
             for ident, name in item_.items():
                 a = Us(name, ident, lev)
-                list_users.append(a)
-        self.set_user = set(list_users)
+                self.set_user.add(a)
 
     def login_system(self, name, identifier):
         """
