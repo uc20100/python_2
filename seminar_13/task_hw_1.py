@@ -13,7 +13,7 @@ class NegativeValueError(UsException):
     - self.value: название переменной в которой произошла ошибка.
 
      Dunder методы:
-    - __init__(self, param): конструктор класса,
+    - __init__(self, value): конструктор класса,
     - __str__(self): возвращает строковое представление ошибки.
     """
 
