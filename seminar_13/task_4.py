@@ -62,7 +62,7 @@ def create_users(file_json: str = 'users.json'):
     :param file_json: JSON файл,
     :return: возвращает множество.
     """
-    list_users = []
+    set_users = set()
     try:
         with open(file_json, 'r', encoding='utf-8') as fj:
             try:
@@ -74,8 +74,8 @@ def create_users(file_json: str = 'users.json'):
     for lev, item_ in json_dict.items():
         for ident, name in item_.items():
             a = Us(name, ident, lev)
-            list_users.append(a)
-    return set(list_users)
+            set_users.add(a)
+    return set_users
 
 
 class Us:
