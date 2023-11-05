@@ -88,8 +88,8 @@ class Rectangle:
     Класс, представляющий прямоугольник.
 
      Атрибуты:
-    - width (int): ширина прямоугольника,
-    - height (int): высота прямоугольника.
+    - width (int | float): ширина прямоугольника,
+    - height (int | float): высота прямоугольника.
 
      Методы:
     - perimeter(): вычисляет периметр прямоугольника,
@@ -147,7 +147,10 @@ class Rectangle:
         width = self.width + other.width
         perimeter = self.perimeter() + other.perimeter()
         height = perimeter // 2 - width
-        return Rectangle(width, height)
+        if width == height:
+            return Rectangle(width, None)
+        else:
+            return Rectangle(width, height)
 
     def __sub__(self, other):
         """
@@ -164,7 +167,10 @@ class Rectangle:
         width = abs(self.width - other.width)
         perimeter = self.perimeter() - other.perimeter()
         height = perimeter // 2 - width
-        return Rectangle(width, height)
+        if width == height:
+            return Rectangle(width, None)
+        else:
+            return Rectangle(width, height)
 
     def __lt__(self, other):
         """
@@ -222,5 +228,26 @@ class Rectangle:
 
 
 if __name__ == '__main__':
-    r = Rectangle(1, 1)
-    r.width = 1
+    rect1 = Rectangle(4, 5)
+    rect2 = Rectangle(3, 3)
+
+    print(rect1)
+    print(rect2)
+
+    print(rect1.perimeter())
+    print(rect1.area())
+    print(rect2.perimeter())
+    print(rect2.area())
+
+    rect_sum = rect1 + rect2
+    rect_diff = rect1 - rect2
+
+    print(rect_sum)
+    print(rect_diff)
+
+    print(rect1 < rect2)
+    print(rect1 == rect2)
+    print(rect1 <= rect2)
+
+    print(repr(rect1))
+    print(repr(rect2))
