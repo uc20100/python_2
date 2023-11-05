@@ -27,6 +27,8 @@ class NegativeValueError(UsException):
             return f"Ширина должна быть положительной, а не {self.value}"
         elif self.param_name[1:] == 'height':
             return f"Высота должна быть положительной, а не {self.value}"
+        else:
+            return 'Неизвестная ошибка'
 
 
 class Value:
