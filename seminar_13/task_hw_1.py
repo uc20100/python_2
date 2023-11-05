@@ -76,7 +76,7 @@ class Value:
         """
         Функция валидирует значения атрибута.
 
-        :param value:
+        :param value: значение атрибута.
         :return:
         """
         if value is None or value <= 0:
