@@ -147,10 +147,7 @@ class Rectangle:
         width = self.width + other.width
         perimeter = self.perimeter() + other.perimeter()
         height = perimeter // 2 - width
-        if width == height:
-            return Rectangle(width, None)
-        else:
-            return Rectangle(width, height)
+        return Rectangle(width, height)
 
     def __sub__(self, other):
         """
@@ -167,10 +164,7 @@ class Rectangle:
         width = abs(self.width - other.width)
         perimeter = self.perimeter() - other.perimeter()
         height = perimeter // 2 - width
-        if width == height:
-            return Rectangle(width, None)
-        else:
-            return Rectangle(width, height)
+        return Rectangle(width, height)
 
     def __lt__(self, other):
         """
@@ -215,7 +209,10 @@ class Rectangle:
         Возвращает:
         - str: строковое представление прямоугольника
         """
-        return f"Прямоугольник со сторонами {self.width} и {self.height}"
+        if self.width == self.height:
+            return f"Квадрат со стороной {self.width}"
+        else:
+            return f"Прямоугольник со сторонами {self.width} и {self.height}"
 
     def __repr__(self):
         """
