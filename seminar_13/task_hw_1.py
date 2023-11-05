@@ -17,11 +17,15 @@ class NegativeValueError(UsException):
     - __str__(self): возвращает строковое представление ошибки.
     """
 
-    def __init__(self, value):
+    def __init__(self, param_name, value):
+        self.param_name = param_name
         self.value = value
 
     def __str__(self):
-        return f"Параметр '{self.value[1:]}' должен быть больше нуля."
+        if self.param_name[1:] == 'width':
+            return f"Ширина должна быть положительной, а не {self.value}"
+        elif self.param_name[1:] == 'height':
+            return f"Высота должна быть положительной, а не {self.value}"
 
 
 class Value:
@@ -80,7 +84,7 @@ class Value:
         :return:
         """
         if value is None or value <= 0:
-            raise NegativeValueError(self.param_name)
+            raise NegativeValueError(self.param_name, value)
 
 
 class Rectangle:
@@ -225,26 +229,20 @@ class Rectangle:
 
 
 if __name__ == '__main__':
-    rect1 = Rectangle(4, 5)
-    rect2 = Rectangle(3, 3)
+    r = Rectangle(-2)
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Ширина должна быть положительной, а не -2
 
-    print(rect1)
-    print(rect2)
+    # r = Rectangle(5, -3)
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Высота должна быть положительной, а не -3
 
-    print(rect1.perimeter())
-    print(rect1.area())
-    print(rect2.perimeter())
-    print(rect2.area())
+    # r = Rectangle(4, 4)
+    # r.width = -3
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Ширина должна быть положительной, а не -3
 
-    rect_sum = rect1 + rect2
-    rect_diff = rect1 - rect2
-
-    print(rect_sum)
-    print(rect_diff)
-
-    print(rect1 < rect2)
-    print(rect1 == rect2)
-    print(rect1 <= rect2)
-
-    print(repr(rect1))
-    print(repr(rect2))
+    # r = Rectangle(4, 4)
+    # r.height = -3
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Высота должна быть положительной, а не -3
