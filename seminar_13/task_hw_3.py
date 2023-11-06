@@ -26,41 +26,62 @@ class InvalidAgeError(Exception):
     """
     Класс ошибки возраста.
 
+     Атрибуты:
+    - self.value: значение переменной в которой произошла ошибка.
+
      Dunder методы:
-    - __str__(self): возвращает описание ошибки.
+    - __init__(self, value): конструктор класса;
+    - __str__(self): возвращает строковое представление ошибки.
     """
 
+    def __init__(self, value):
+        self.value = value
+
     def __str__(self):
-        return 'Ошибка возраста.'
+        return f'Invalid age: {self.value}. Age should be a positive integer.'
 
 
 class InvalidNameError(Exception):
     """
     Класс ошибки ФИО.
 
+     Атрибуты:
+    - self.value: значение переменной в которой произошла ошибка.
+
      Dunder методы:
-    - __str__(self): возвращает описание ошибки.
+    - __init__(self, value): конструктор класса;
+    - __str__(self): возвращает строковое представление ошибки.
     """
 
+    def __init__(self, value):
+        self.value = value
+
     def __str__(self):
-        return 'Ошибка ФИО'
+        return f'Invalid name: {self.value}. Name should be a non-empty string.'
 
 
 class InvalidIdError(Exception):
     """
     Класс ошибки id.
 
+     Атрибуты:
+    - self.value: значение переменной в которой произошла ошибка.
+
      Dunder методы:
-    - __str__(self): возвращает описание ошибки.
+    - __init__(self, value): конструктор класса;
+    - __str__(self): возвращает строковое представление ошибки.
     """
 
+    def __init__(self, value):
+        self.value = value
+
     def __str__(self):
-        return 'Ошибка id'
+        return f'Invalid id: {self.value}. Id should be a 6-digit positive integer between 100000 and 999999.'
 
 
 class Value:
     """
-    Дескриптор класса Person.
+    Дескриптор класса Person и Employee.
 
      Методы:
     - validate(self, value): валидация значений атрибутов класса.
@@ -111,14 +132,14 @@ class Value:
         :return:
         """
         if self.param_name[1:] in ('first_name', 'second_name', 'surname'):
-            if value == '':
-                raise InvalidNameError()
+            if not isinstance(value, str) or value == '':
+                raise InvalidNameError(value)
         elif self.param_name[1:] == 'age':
             if not isinstance(value, int) or value < 0:
-                raise InvalidAgeError()
+                raise InvalidAgeError(value)
         elif self.param_name[1:] == 'user_id':
             if not isinstance(value, int) or len(str(value)) < 6 or value < 0:
-                raise InvalidIdError()
+                raise InvalidIdError(value)
         else:
             raise ValueError('Неизвестный параметр')
 
@@ -134,7 +155,8 @@ class Person:
     - self.age: возраст.
 
      Методы:
-    - birthday(self): добавляет к возрасту один год.
+    - birthday(self): добавляет к возрасту один год;
+    - get_age(self): возвращает возраст.
 
      Dunder методы:
     - __init__(self, first_name, second_name, surname, age): конструктор класса;
@@ -166,6 +188,14 @@ class Person:
         :return:
         """
         self.age += 1
+
+    def get_age(self):
+        """
+        Функция возвращает возраст.
+
+        :return:
+        """
+        return self.age
 
 
 class Employee(Person):
@@ -210,8 +240,20 @@ class Employee(Person):
 
 
 if __name__ == '__main__':
-    person = Person("аа", "John", "Doe", 30)
+    person = Person("", "John", "Doe", 30)
     print(person)
-    n = Employee('Иван', 'Иванович', 'Иванов', 30, 123456)
-    print(n)
-    print(n.get_level())
+    # Ожидаемый ответ:
+    # Invalid name: . Name should be a non-empty string.
+
+    # person = Person("Alice", "Smith", "Johnson", -5)
+    # Ожидаемый ответ:
+    # __main__.InvalidAgeError: Invalid age: -5. Age should be a positive integer.
+
+    # employee = Employee("Bob", "Johnson", "Brown", 40, 12345)
+    # Ожидаемый ответ:
+    # __main__.InvalidIdError: Invalid id: 12345. Id should be a 6-digit positive integer between 100000 and 999999.
+
+    # person = Person("Alice", "Smith", "Johnson", 25)
+    # print(person.get_age())
+    # Ожидаемый ответ:
+    # 25
