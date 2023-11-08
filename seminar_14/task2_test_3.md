@@ -6,8 +6,8 @@
 
     >>> from task_1 import modification_str  
 
-Проверка возврат строки с удалением знаков пунктуации  
+'Проверка возврат строки с удалением знаков пунктуации  
 
     >>> modification_str('Hello World, Привет мир!')
-    Hello World Привет мир
+    'Hello World Привет мир'
 

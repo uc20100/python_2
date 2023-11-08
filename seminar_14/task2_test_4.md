@@ -9,5 +9,5 @@
 Проверка возврат строки с удалением букв других алфавитов
 
     >>> modification_str('Hello World, Привет мир!')
-    Hello World,  !
+    'Hello World,  !'
 
