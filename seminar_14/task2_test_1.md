@@ -6,8 +6,8 @@
 
     >>> from task_1 import modification_str  
 
-Проверяем возврат строки без изменений  
+'Проверяем возврат строки без изменений  
 
     >>> modification_str('Hello World, Привет мир!')
-    Hello World, Привет мир!
+    'Hello World, Привет мир!'
 
