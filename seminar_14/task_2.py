@@ -13,4 +13,5 @@ import doctest
 # doctest.testfile('task2_test_2.md', verbose=True)
 # doctest.testfile('task2_test_3.md', verbose=True)
 # doctest.testfile('task2_test_4.md', verbose=True)
-doctest.testfile('task2_test_5.md', verbose=True)
+# doctest.testfile('task2_test_5.md', verbose=True)
+doctest.testfile('task2_test_all.md', verbose=True)
