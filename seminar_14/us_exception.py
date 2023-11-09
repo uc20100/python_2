@@ -4,7 +4,7 @@ class UsException(BaseException):
 
 class LevelException(UsException):
     """
-        Класс ошибки доступа пользователя.
+        Класс ошибки уровня пользователя.
 
          Атрибуты:
         - self.your_level (int | str): ваш уровень доступа;
