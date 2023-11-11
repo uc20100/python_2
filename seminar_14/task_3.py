@@ -15,16 +15,16 @@ from task_1 import modification_str
 
 class TestModification(unittest.TestCase):
     def test_without_changes(self):
-        self.assertEqual(modification_str('Hello World, Привет мир!'), 'Hello World, Привет мир!','Тест1 провален')
+        self.assertEqual(modification_str('hello world'), 'hello world','Тест1 провален')
 
     def test_small_case(self):
-        self.assertEqual(modification_str('Hello World, Привет мир!'), 'hello world, привет мир!','Тест2 провален')
+        self.assertEqual(modification_str('Hello World'), 'hello world','Тест2 провален')
 
     def test_no_punctuation(self):
-        self.assertEqual(modification_str('Hello World, Привет мир!'), 'Hello World Привет мир','Тест3 провален')
+        self.assertEqual(modification_str('hello world!'), 'hello world','Тест3 провален')
 
     def test_only_latin(self):
-        self.assertEqual(modification_str('Hello World, Привет мир!'), 'Hello World,  !','Тест4 провален')
+        self.assertEqual(modification_str('hello world_Привет_мир'), 'hello world','Тест4 провален')
 
     def test_all_conditions(self):
         self.assertEqual(modification_str('Hello World, Привет мир!'), 'hello world  ','Тест5 провален')
