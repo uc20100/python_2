@@ -8,23 +8,23 @@
 
 'Проверяем возврат строки без изменений  
 
-    >>> modification_str('Hello World, Привет мир!')
-    'Hello World, Привет мир!'
+    >>> modification_str('hello world')
+    'hello world'
 
 Проверка возврат строки с преобразованием регистра без потери символов  
 
-    >>> modification_str('Hello World, Привет мир!')
-    'hello world, привет мир!'
+    >>> modification_str('Hello World')
+    'hello world'
 
 'Проверка возврат строки с удалением знаков пунктуации  
 
-    >>> modification_str('Hello World, Привет мир!')
-    'Hello World Привет мир'
+    >>> modification_str('hello world!')
+    'hello world'
 
 Проверка возврат строки с удалением букв других алфавитов
 
-    >>> modification_str('Hello World, Привет мир!')
-    'Hello World,  !'
+    >>> modification_str('hello world_Привет_мир')
+    'hello world'
 
 Проверяем возврат строки с преобразованием регистра без потери символов, с удалением знаков пунктуации, с удалением 
 букв других алфавитов
