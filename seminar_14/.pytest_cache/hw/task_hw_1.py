@@ -29,8 +29,10 @@
 
 import doctest
 
+
 class NegativeValueError(ValueError):
     pass
+
 
 class Rectangle:
 
@@ -140,6 +142,7 @@ class Rectangle:
         perimeter = self.perimeter() - other.perimeter()
         height = perimeter / 2 - width
         return Rectangle(width, height)
+
 
 if __name__ == '__main__':
     __file__ = None
