@@ -55,3 +55,25 @@ class Rectangle:
         perimeter = self.perimeter() - other.perimeter()
         height = perimeter / 2 - width
         return Rectangle(width, height)
+
+if __name__ == '__main__':
+    r1 = Rectangle(5)
+    r2 = Rectangle(3,4)
+    r3 = r1 - r2
+    print(r3.width, r3.height)
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Ширина должна быть положительной, а не -2
+
+    # r = Rectangle(5, -3)
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Высота должна быть положительной, а не -3
+
+    # r = Rectangle(4, 4)
+    # r.width = -3
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Ширина должна быть положительной, а не -3
+
+    # r = Rectangle(4, 4)
+    # r.height = -3
+    # Ожидаемый ответ:
+    # __main__.NegativeValueError: Высота должна быть положительной, а не -3
