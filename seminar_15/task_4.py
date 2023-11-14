@@ -24,9 +24,8 @@ def convert_text_to_date(date_str: str):
     Функция преобразовывает строковое представление даты в объект date, логирует ошибки если они есть.
 
     :param date_str: строковое представление даты;
-    :return: дата в формате date.
+    :return: дата в формате date или None если не удалось преобразовать.
     """
-
     date_str.lower()
     week, weekday, month = date_str.split()
     weekday_str = weekday
