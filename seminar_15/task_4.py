@@ -44,7 +44,7 @@ def convert_text_to_date(date_str: str):
             month = 'май'
         week, weekday, month = int(week), weekday[:2].title(), month[:3].lower()
         month = datetime.strptime(month.encode('utf-8').decode('cp1251'), '%b').month
-        week_iso = month * 4 + week - 1
+        week_iso = month * 4 + week
         date_val = datetime.strptime(
             f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
             '%Y %W %m %a')
@@ -58,4 +58,4 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('1-я среда ноября'))
+    print(convert_text_to_date('1-й понедельник ноября'))
