@@ -27,7 +27,11 @@ def convert_text_to_date(date_str: str):
     :return: дата в формате date или None если не удалось преобразовать.
     """
     date_str.lower()
-    week, weekday, month = date_str.split()
+    try:
+        week, weekday, month = date_str.split()
+    except ValueError as e:
+        logger_val.error(e)
+        return None
     weekday_str = weekday
     for item in ('а', 'е', 'и', 'о', 'э', 'ю', 'я', 'у'):
         weekday = weekday.replace(item, '')
@@ -63,4 +67,4 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('10-й четверг октября'))
+    print(convert_text_to_date('1-й четверг октября'))
