@@ -3,6 +3,7 @@
 # я среда мая” и т.п.
 # 📌 Преобразуйте его в дату в текущем году.
 # 📌 Логируйте ошибки, если текст не соответсвует формату.
+
 import locale
 from datetime import date, datetime
 import logging
@@ -29,42 +30,32 @@ def convert_text_to_date(date_str: str):
     date_str.lower()
     try:
         week, weekday, month = date_str.split()
+        weekday_str = weekday
+        month_str = month
+        week_str = week
     except ValueError as e:
         logger_val.error(e)
         return None
-    weekday_str = weekday
     for item in ('а', 'е', 'и', 'о', 'э', 'ю', 'я', 'у'):
         weekday = weekday.replace(item, '')
     try:
         week, _ = week.split('-')
         if month == 'мая':
             month = 'май'
-        week, weekday, month = (int(week), weekday[:2].title(), month[:3].lower())
-    except ValueError as e:
-        logger_val.error(e)
-        return None
-
-    str_d = f'{weekday} {month}'.encode('utf-8').decode('cp1251')
-    try:
-        read_date = datetime.strptime(str_d, '%a %b')
-    except ValueError as e:
-        logger_val.error(str(e).encode('cp1251').decode('utf-8'))
-        return None
-    month = read_date.month
-    weekday = read_date.isoweekday()
-    week_iso = month * 4 + week - 1
-
-    try:
-        result_val = date.fromisocalendar(datetime.now().year, week_iso, weekday)
-        if result_val.month != month:
-            logger_val.error(f'Ошибка количества "{weekday_str} = {week}"')
-            return None
-        return result_val
+        week, weekday, month = int(week), weekday[:2].title(), month[:3].lower()
+        month = datetime.strptime(month.encode('utf-8').decode('cp1251'), '%b').month
+        week_iso = month * 4 + week - 1
+        date_val = datetime.strptime(
+            f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
+            '%Y %W %m %a')
+        if date_val.month == month:
+            return date_val.day
+        else:
+            logger_val.error(f'{week_str} {weekday_str} нет в {month_str}')
     except ValueError as e:
         logger_val.error(str(e).encode('cp1251').decode('utf-8'))
-
     return None
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('1-й четверг октября'))
+    print(convert_text_to_date('1-я среда ноября'))
