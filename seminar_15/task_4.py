@@ -33,6 +33,8 @@ def convert_text_to_date(date_str: str):
         weekday = weekday.replace(item, '')
     try:
         week, _ = week.split('-')
+        if month == 'мая':
+            month = 'май'
         week, weekday, month = (int(week), weekday[:2].title(), month[:3].lower())
     except ValueError as e:
         logger_val.error(e)
@@ -61,4 +63,4 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('1-й четверг ноября'))
+    print(convert_text_to_date('10-й четверг октября'))
