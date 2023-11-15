@@ -63,7 +63,7 @@ def convert_text_to_date(date_str: str):
         else:
             weekday = int(weekday)
 
-        week_iso = month * 4 + week - 1
+        week_iso = month * 4 + week
         if isinstance(weekday, str):
             date_val = datetime.strptime(
                 f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
@@ -72,14 +72,15 @@ def convert_text_to_date(date_str: str):
             date_val = datetime.strptime(
                 f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
                 '%Y %W %m %u')
+
         if date_val.month == month:
             return date_val.day
         else:
-            logger_val.error(f'{week_str} {weekday_str} нет в {month_str}')
+            logger_val.error(f'week = {week_str}, weekday = {weekday_str}, month = {month_str}')
     except ValueError as e:
         logger_val.error(str(e).encode('cp1251').decode('utf-8'))
     return None
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('5 3 ноябре'))
+    print(convert_text_to_date('4 понедельник ноябре'))
