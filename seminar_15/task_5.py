@@ -11,6 +11,7 @@
 import locale
 from datetime import date, datetime
 import logging
+import argparse
 
 
 locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')  # the ru locale is installed
@@ -97,10 +98,21 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    str_date = ['1-й понедельник января', '1 1 1', '1-й вторник февраля', '1-я среда марта',
-                '1-й ЧТ АПР', '3-я среда мая', '3 3 5', '1-я субб июнь',
-                '1-й воскресенье июля', '1-й понед авгус', '1-й понедельник сентябрь',
-                '1-й понедельник октября', '4-й понедельник ноября', '2-й понедельник декабря', '2 1 12']
+    # str_date = ['1-й понедельник января', '1 1 1', '1-й вторник февраля', '1-я среда марта',
+    #             '1-й ЧТ АПР', '3-я среда мая', '3 3 5', '1-я субб июнь',
+    #             '1-й воскресенье июля', '1-й понед авгус', '1-й понедельник сентябрь',
+    #             '1-й понедельник октября', '4-й понедельник ноября', '2-й понедельник декабря', '2 1 12']
+    #
+    # for item in str_date:
+    #     print(f'{item} - {convert_text_to_date(item)}')
 
-    for item in str_date:
-        print(f'{item} - {convert_text_to_date(item)}')
+    parser = argparse.ArgumentParser(description='Вычисление числа месяца')
+    parser.add_argument('-week', metavar='week', type=str,
+                        help='номер недели в месяце (1-4)', default=1)
+    parser.add_argument('-weekday', metavar='weekday', type=str,
+                        help='день недели (понедельник-воскресенье или 1-7)', default=datetime.now().isoweekday())
+    parser.add_argument('-month', metavar='month', type=str,
+                        help='месяц года (январь-декабрь или 1-12)', default=datetime.now().month)
+    args = parser.parse_args()
+    print(f"-week:{args.week}, -weekday:{args.weekday}, -month:{args.month}, result_day:{convert_text_to_date(f'{args.week} {args.weekday} {args.month}')}")
+    # python task_5.py -week 1 -weekday 1 -month 1
