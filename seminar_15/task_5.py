@@ -20,7 +20,7 @@ logging.basicConfig(format='{levelname:<8} - {asctime}. {msg}, в строке {
                     filename='log_date_err_2.log',
                     filemode='a',
                     encoding='utf-8',
-                    level=logging.ERROR,
+                    level=logging.DEBUG,
                     datefmt='%Y-%m-%d %H:%M:%S')
 logger_val = logging.getLogger(__name__)
 
@@ -35,52 +35,74 @@ def convert_text_to_date(date_str: str):
     date_str.lower()
     try:
         week, weekday, month = date_str.split()
-        weekday_str = weekday
         month_str = month
         week_str = week
     except ValueError as e:
         logger_val.error(e)
         return None
-    for item in ('а', 'е', 'и', 'о', 'э', 'ю', 'я', 'у'):
-        weekday = weekday.replace(item, '')
-    try:
-        if not week.isdigit():
+    for item_ in ('а', 'е', 'и', 'о', 'э', 'ю', 'я', 'у'):
+        weekday = weekday.replace(item_, '')
+
+    if not week.isdigit():
+        try:
             week, _ = week.split('-')
             week = int(week)
-        else:
-            week = int(week)
+        except ValueError:
+            logger_val.error(f'Ошибка конвертации строки "{week_str}"')
+            return None
+    else:
+        week = int(week)
 
-        if not month.isdigit():
-            if month == 'мая':
-                month = 'май'
-            month = month[:3].lower()
-            month = datetime.strptime(month.encode('utf-8').decode('cp1251'), '%b').month
-        else:
-            month = int(month)
+    if not month.isdigit():
+        if month == 'мая':
+            month = 'май'
+        month = month[:3].lower().encode('utf-8').decode('cp1251')
+        try:
+            month = datetime.strptime(month, '%b').month
+        except ValueError:
+            logger_val.error(f'Ошибка конвертации строки "{month_str}"')
+            return None
+    else:
+        month = int(month)
 
-        if not weekday.isdigit():
-            weekday = weekday[:2].title()
-        else:
-            weekday = int(weekday)
+    if not weekday.isdigit():
+        weekday = weekday[:2].title().encode('utf-8').decode('cp1251')
+    else:
+        weekday = int(weekday)
+    # Номер недели в году в зависимости от месяца
+    week_iso = datetime(datetime.now().year, month, 2, ).isocalendar().week
 
-        week_iso = month * 4 + week
+    try:
+        # Точное вычисление недели в году в зависимости от года, месяца, дня недели
+        test_moth = datetime.strptime(
+            f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %a').month
+        if test_moth != month:
+            week_iso += week
+        else:
+            week_iso += week - 1
+        # Вычисление дня в зависимости от года, месяца, дня недели в году
         if isinstance(weekday, str):
             date_val = datetime.strptime(
-                f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
-                '%Y %W %m %a')
+                f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %a')
         else:
             date_val = datetime.strptime(
-                f'{datetime.now().year} {week_iso} {month} {weekday}'.encode('utf-8').decode('cp1251'),
-                '%Y %W %m %u')
+                f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %u')
+        if date_val.month != month:
+            logger_val.error(f'Задали слишком большое количество "{week_str}"')
+            return None
+    except ValueError:
+        logger_val.error('Ошибка преобразование строки в дату')
+        return None
 
-        if date_val.month == month:
-            return date_val.day
-        else:
-            logger_val.error(f'week = {week_str}, weekday = {weekday_str}, month = {month_str}')
-    except ValueError as e:
-        logger_val.error(str(e).encode('cp1251').decode('utf-8'))
-    return None
+    return date_val.day
 
 
 if __name__ == '__main__':
-    print(convert_text_to_date('4 понедельник ноябре'))
+    str_date = ['1-й понедельник января', '1-й вторник февраля', '1-я среда марта',
+                '1-й четверг апреля', '1-я пятница мая', '1-я суббота июня',
+                '1-й воскресенье июля', '1-й понедельник август', '1-й понедельник сентябрь',
+                '1-й понедельник октября', '4-й понедельник ноября', '1-й понедельник декабря']
+    for item in str_date:
+        print(f'{item} - {convert_text_to_date(item)}')
+
+
