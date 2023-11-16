@@ -115,4 +115,8 @@ if __name__ == '__main__':
                         help='месяц года (январь-декабрь или 1-12)', default=datetime.now().month)
     args = parser.parse_args()
     print(f"-week:{args.week}, -weekday:{args.weekday}, -month:{args.month}, result_day:{convert_text_to_date(f'{args.week} {args.weekday} {args.month}')}")
+
+    # Запуск из командной строки
     # python task_5.py -week 1 -weekday 1 -month 1
+    # Описание параметров
+    # python task_5.py --help
