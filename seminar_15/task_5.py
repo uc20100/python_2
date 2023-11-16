@@ -12,7 +12,7 @@ import locale
 from datetime import date, datetime
 import logging
 
-# Локаль почему-то не переключается на кодировку utf-8, перекодирую в функции
+
 locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')  # the ru locale is installed
 
 logging.basicConfig(format='{levelname:<8} - {asctime}. {msg}, в строке {lineno:03d}',
@@ -74,19 +74,18 @@ def convert_text_to_date(date_str: str):
 
     try:
         # Точное вычисление недели в году в зависимости от года, месяца, дня недели
+        char_ = 'a' if isinstance(weekday, str) else 'u'
+
         test_moth = datetime.strptime(
-            f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %a').month
+            f'{datetime.now().year} {week_iso} {weekday}', f'%Y %W %{char_}').month
         if test_moth != month:
             week_iso += week
         else:
             week_iso += week - 1
         # Вычисление дня в зависимости от года, месяца, дня недели в году
-        if isinstance(weekday, str):
-            date_val = datetime.strptime(
-                f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %a')
-        else:
-            date_val = datetime.strptime(
-                f'{datetime.now().year} {week_iso} {weekday}', '%Y %W %u')
+        date_val = datetime.strptime(
+            f'{datetime.now().year} {week_iso} {weekday}', f'%Y %W %{char_}')
+
         if date_val.month != month:
             logger_val.error(f'Задали слишком большое количество "{week_str}"')
             return None
@@ -98,11 +97,10 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    str_date = ['1-й понедельник января', '1-й вторник февраля', '1-я среда марта',
-                '1-й четверг апреля', '1-я пятница мая', '1-я суббота июня',
-                '1-й воскресенье июля', '1-й понедельник август', '1-й понедельник сентябрь',
-                '1-й понедельник октября', '4-й понедельник ноября', '1-й понедельник декабря']
+    str_date = ['1-й понедельник января', '1 1 1', '1-й вторник февраля', '1-я среда марта',
+                '1-й ЧТ АПР', '3-я среда мая', '3 3 5', '1-я субб июнь',
+                '1-й воскресенье июля', '1-й понед авгус', '1-й понедельник сентябрь',
+                '1-й понедельник октября', '4-й понедельник ноября', '2-й понедельник декабря', '2 1 12']
+
     for item in str_date:
         print(f'{item} - {convert_text_to_date(item)}')
-
-
