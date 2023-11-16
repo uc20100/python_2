@@ -21,7 +21,7 @@ logging.basicConfig(format='{levelname:<8} - {asctime}. {msg}, в строке {
                     filename='log_date_err_2.log',
                     filemode='a',
                     encoding='utf-8',
-                    level=logging.DEBUG,
+                    level=logging.ERROR,
                     datefmt='%Y-%m-%d %H:%M:%S')
 logger_val = logging.getLogger(__name__)
 
