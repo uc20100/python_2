@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Вычисление числа месяца')
     parser.add_argument('-week', metavar='week', type=str,
-                        help='номер недели в месяце (1-4)', default=1)
+                        help='номер недели в месяце (1-5)', default=1)
     parser.add_argument('-weekday', metavar='weekday', type=str,
                         help='день недели (понедельник-воскресенье или 1-7)', default=datetime.now().isoweekday())
     parser.add_argument('-month', metavar='month', type=str,
