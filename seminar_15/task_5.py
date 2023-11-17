@@ -13,7 +13,6 @@ from datetime import date, datetime
 import logging
 import argparse
 
-
 locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')  # the ru locale is installed
 
 logging.basicConfig(format='{levelname:<8} - {asctime}. {msg}, в строке {lineno:03d}',
@@ -98,13 +97,10 @@ def convert_text_to_date(date_str: str):
 
 
 if __name__ == '__main__':
-    # str_date = ['1-й понедельник января', '1 1 1', '1-й вторник февраля', '1-я среда марта',
-    #             '1-й ЧТ АПР', '3-я среда мая', '3 3 5', '1-я субб июнь',
-    #             '1-й воскресенье июля', '1-й понед авгус', '1-й понедельник сентябрь',
-    #             '1-й понедельник октября', '4-й понедельник ноября', '2-й понедельник декабря', '2 1 12']
-    #
-    # for item in str_date:
-    #     print(f'{item} - {convert_text_to_date(item)}')
+    str_date = ['1-й понедельник января', '1 1 1', '1-й вторник февраля', '1-я среда марта',
+                '1-й ЧТ АПР', '3-я среда мая', '3 3 5', '1-я субб июнь',
+                '1-й воскресенье июля', '1-й понед авгус', '1-й понедельник сентябрь',
+                '1-й понедельник октября', '4-й понедельник ноября', '2-й понедельник декабря', '2 1 12']
 
     parser = argparse.ArgumentParser(description='Вычисление числа месяца')
     parser.add_argument('-week', metavar='week', type=str,
@@ -113,11 +109,21 @@ if __name__ == '__main__':
                         help='день недели (понедельник-воскресенье или 1-7)', default=datetime.now().isoweekday())
     parser.add_argument('-month', metavar='month', type=str,
                         help='месяц года (январь-декабрь или 1-12)', default=datetime.now().month)
+    parser.add_argument('-demo', metavar='demo', type=int,
+                        help='демонстрация работы функции (0-демонстрации нет, 1-демонстрация активирована)', default=0)
     args = parser.parse_args()
-    print(f"-week:{args.week}, -weekday:{args.weekday}, -month:{args.month}, "
-          f"result_day:{convert_text_to_date(f'{args.week} {args.weekday} {args.month}')}")
+
+    if args.demo:
+        print('Демонстрация:')
+        for item in str_date:
+            print(f'{item} - {convert_text_to_date(item)}')
+    else:
+        print(f"-week:{args.week}, -weekday:{args.weekday}, -month:{args.month}, "
+              f"result_day:{convert_text_to_date(f'{args.week} {args.weekday} {args.month}')}")
 
     # Запуск из командной строки
     # python task_5.py -week 1 -weekday 1 -month 1
     # Описание параметров
     # python task_5.py --help
+    # Демонстрация работы функции
+    # python task_5.py -demo 1
