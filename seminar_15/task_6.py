@@ -74,7 +74,7 @@ def info_folder(folder: str):
         logger_val.info(f'parent_folder: {item.parent_folder:<{max_len_parent_folder + 1}}, '
                         f'name: {item.name_file_or_folder:<{max_len_name_file_or_folder + 1}}, '
                         f'folder_flag: {str(item.flag_folder):<{max_len_flag_folder + 1}},'
-                        f' type_file {item.type_file:<{max_len_type_file + 1}}')
+                        f' type_file: {item.type_file:<{max_len_type_file + 1}}')
 
 
 if __name__ == '__main__':
