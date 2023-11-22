@@ -20,7 +20,7 @@ import argparse
 
 logging.basicConfig(format='{levelname:<8} - {asctime}. {msg}',
                     style='{',
-                    filename='queen_placement.txt',
+                    filename='queen_placement.log',
                     filemode='a',
                     encoding='utf-8',
                     level=logging.INFO,
